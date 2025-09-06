@@ -11,7 +11,7 @@ const Page = styled.div`
     height: 100%;
 `;
 
-const MainButton = styled.img`
+const MainButtonWrapper = styled.div`
     position: absolute;
     margin: auto;
     left: 0;
@@ -21,6 +21,11 @@ const MainButton = styled.img`
     width: 80%;
     aspect-ratio: 1/1;
     border-radius: 50%;
+`
+
+const MainButton = styled.img`
+    width: 100%;
+    height: 100%;
 `;
 
 const LevelWrapper = styled.div`
@@ -59,4 +64,4 @@ const Click = styled.div`
     font-weight: bold;
 `
 
-export { Click, Page, MainButton, LevelWrapper, LevelName, LevelCount, LevelLine, LevelHead };
+export { MainButtonWrapper, Click, Page, MainButton, LevelWrapper, LevelName, LevelCount, LevelLine, LevelHead };

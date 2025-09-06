@@ -59,7 +59,9 @@ const ClickPage = () => {
                     {click.text}
                 </S.Click>
             ))}
-            <S.MainButton src={coinIconUrl} as={motion.img} whileTap={{ scale: 1.05 }} transition={{ duration: 0.5 }} onClick={handleClick} />
+            <S.MainButtonWrapper as={motion.div} whileTap={{ scale: 1.05 }} transition={{ duration: 0.5 }} onClick={handleClick}>
+                <S.MainButton src={coinIconUrl} />
+            </S.MainButtonWrapper>
             <S.LevelWrapper>
                 <Divider />
                 <S.LevelHead>

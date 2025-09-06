@@ -26,13 +26,21 @@ const GlobalStyles = createGlobalStyle`
     img {
         -webkit-touch-callout: none;
         -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
         user-select: none;
+        pointer-events: none;
     }
 `
 
 const Layout = () => {
 
     const { isOpen, closeModal, modalContent } = useModal();
+
+    document.addEventListener('contextmenu', function (e) {
+        e.preventDefault();
+    });
 
     return (
         <>
