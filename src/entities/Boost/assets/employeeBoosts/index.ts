@@ -1,9 +1,9 @@
-import cleanerImage from './cleaner.png';
-import sellerImage from './seller.png';
-import courierImage from './courier.png';
-import securityImage from './security.png';
-import bookkeeperImage from './bookkeeper.png';
-import administratorImage from './administrator.png';
+import cleanerImage from './cleaner.webp';
+import sellerImage from './seller.webp';
+import courierImage from './courier.webp';
+import securityImage from './security.webp';
+import bookkeeperImage from './bookkeeper.webp';
+import administratorImage from './administrator.webp';
 
 export {
     cleanerImage,

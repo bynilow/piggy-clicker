@@ -22,6 +22,12 @@ const GlobalStyles = createGlobalStyle`
 
         &::-webkit-scrollbar { width: 0; }
     }
+
+    img {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        user-select: none;
+    }
 `
 
 const Layout = () => {
