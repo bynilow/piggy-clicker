@@ -1,11 +1,7 @@
 const path = require('path');
-const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const Dotenv = require('dotenv');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
-const dotenv = require('dotenv');
-
-// Загружаем .env файл
-const envConfig = dotenv.config().parsed || {};
 
 module.exports = {
     entry: './src/index.tsx',
@@ -50,10 +46,9 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: './public/index.html',
         }),
-        new webpack.DefinePlugin({
-            'process.env.API_ENDPOINT': JSON.stringify(envConfig.API_ENDPOINT || 'http://localhost:5000'),
-            'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
-        }),
+        new Dotenv({
+            systemvars: true
+        })
     ],
 
     devServer: {
