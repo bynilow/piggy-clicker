@@ -9,12 +9,26 @@ import { MAIN_PAGE_ACTIONS } from '../constants';
 import { TargetAndTransition, VariantLabels } from 'motion/dist/react';
 import { AnimatePresence, motion } from 'motion/react';
 import { MainPageActionsId } from '../model';
+import { useCoins, useUser } from '@/entities/User';
+import { useUserStore } from '@/shared';
 
 const tabs: Record<MainPageActionsId, JSX.Element> = {
     main: <ClickPage />,
     boosts: <BoostsPage />,
     referrals: <ReferralsPage />,
     send: <></>
+}
+
+const initialStyles: TargetAndTransition | VariantLabels = {
+    filter: 'blur(10px)',
+    opacity: 0,
+    translateY: 30
+}
+
+const targetStyles: TargetAndTransition | VariantLabels = {
+    filter: 'blur(0px)',
+    opacity: 1,
+    translateY: 0
 }
 
 const MainPage = () => {
@@ -25,24 +39,16 @@ const MainPage = () => {
         setActiveButton(actionName);
     }
 
-    const initialStyles: TargetAndTransition | VariantLabels = {
-        filter: 'blur(10px)',
-        opacity: 0,
-        translateY: 30
-    }
+    const { coins } = useUserStore();
 
-    const targetStyles: TargetAndTransition | VariantLabels = {
-        filter: 'blur(0px)',
-        opacity: 1,
-        translateY: 0
-    }
+    // console.log(coins)
 
     return (
         <S.Main>
             <S.Head>
                 <S.BalanceInfo>
                     <S.Balance>
-                        {getFormattedCoins(125525.55)} <CoinIcon />
+                        {getFormattedCoins(coins || 0)} <CoinIcon />
                     </S.Balance>
                     <S.AutomaticIncome>
                         + {getFormattedCoins(22.52)} / сек

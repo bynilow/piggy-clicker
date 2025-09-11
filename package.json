@@ -4,8 +4,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack serve --mode development",
-    "build": "webpack --mode production",
+    "start": "webpack serve --mode development --env='.env'",
+    "build": "webpack --mode production --env='.env'",
     "build:dev": "webpack --mode development"
   },
   "keywords": [],
@@ -21,6 +21,7 @@
     "@types/react-dom": "^19.1.7",
     "babel-loader": "^10.0.0",
     "css-loader": "^7.1.2",
+    "dotenv-webpack": "^8.1.1",
     "html-webpack-plugin": "^5.6.4",
     "style-loader": "^4.0.0",
     "ts-loader": "^9.5.4",
@@ -31,9 +32,15 @@
     "webpack-dev-server": "^5.2.2"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.87.4",
+    "@types/telegram-web-app": "^9.0.0",
+    "axios": "^1.11.0",
+    "dotenv": "^17.2.2",
     "motion": "^12.23.12",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
-    "styled-components": "^6.1.19"
+    "styled-components": "^6.1.19",
+    "telegram-webapps-types": "^1.0.5",
+    "zustand": "^5.0.8"
   }
 }

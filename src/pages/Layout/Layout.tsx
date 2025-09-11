@@ -1,10 +1,18 @@
-import { Modal, ModalProvider, useModal } from '@/shared';
+import { useUser } from '@/entities/User';
+import { Error, Loader, Modal, useModal, useUserStore } from '@/shared';
+import { useEffect } from 'react';
+import { createGlobalStyle } from 'styled-components';
 import { MainPage } from '../MainPage';
 import * as S from './Layout.styles';
-import { createGlobalStyle } from 'styled-components';
-import { createContext, useState } from 'react';
+
+const tg = window.Telegram.WebApp;
 
 const GlobalStyles = createGlobalStyle`
+    :root {
+        --text-primary: #fff;
+        --text-secondary: #a0a0a0;
+    }
+
     body {
         box-sizing: border-box;
         margin: 0;
@@ -42,6 +50,23 @@ const Layout = () => {
         e.preventDefault();
     });
 
+    const userId = tg?.initDataUnsafe?.user?.id || 1337;
+    const userName = tg?.initDataUnsafe?.user?.username || 'test_user';
+
+    const { userData, userError, userIsLoading, createUser } = useUser(userId, userName);
+
+    useEffect(() => {
+        if (!userData?.id && !userIsLoading) {
+            createUser();
+        }
+    }, [userData])
+
+    useEffect(() => {
+        tg.ready();
+    }, [])
+
+    const canRenderMainPage = userData?.id && !userError && !userIsLoading;
+
     return (
         <>
             <Modal isOpened={isOpen} onClose={closeModal}>
@@ -49,10 +74,25 @@ const Layout = () => {
             </Modal>
             <S.Layout>
                 <GlobalStyles />
-                <MainPage />
+                {
+                    userError && (
+                        <Error />
+                    )
+                }
+                {
+                    userIsLoading && (
+                        <Loader />
+                    )
+                }
+                {
+                    canRenderMainPage && (
+                        <MainPage />
+                    )
+                }
             </S.Layout>
         </>
     );
 }
 
 export { Layout };
+

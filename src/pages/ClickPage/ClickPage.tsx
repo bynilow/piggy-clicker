@@ -1,19 +1,21 @@
-import { Divider } from '@/shared';
+import { Divider, useUserStore } from '@/shared';
 import { motion } from "motion/react"
 import * as S from './ClickPage.styles';
 import { useState } from 'react';
 import { coinIconUrl } from '@/shared/assets';
 import { CLICK_X_OFFSET, CLICK_Y_OFFSET, RANDOM_CLICK_ROTATION_DEGREE, RANDOM_OFFSET_X } from './constants';
+import { addCoins, useCoins, useUser } from '@/entities/User';
 
 const ClickPage = () => {
     const [clicks, setClicks] = useState<any[]>([]);
+
+    const { id } = useUserStore();
+    const { addCoins } = useCoins();
 
     const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
         const rect = event.currentTarget.getBoundingClientRect();
         const x = event.clientX - rect.left + CLICK_X_OFFSET;
         const y = event.clientY - rect.top + CLICK_Y_OFFSET;
-
-        console.log(event.clientY, rect)
 
         const randomRotation = Math.random() * RANDOM_CLICK_ROTATION_DEGREE;
         const isNegativeRotation = Math.random() > 0.5;
@@ -34,6 +36,8 @@ const ClickPage = () => {
         setTimeout(() => {
             setClicks(prev => prev.filter(click => click.id !== newClick.id));
         }, 1000);
+
+        addCoins({ user_id: id, coins: 1 });
     };
 
     return (

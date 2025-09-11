@@ -1,6 +1,11 @@
 const path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
+const dotenv = require('dotenv');
+
+// Загружаем .env файл
+const envConfig = dotenv.config().parsed || {};
 
 module.exports = {
     entry: './src/index.tsx',
@@ -33,15 +38,6 @@ module.exports = {
                 configFile: path.resolve(__dirname, 'tsconfig.json'),
             })
         ],
-        alias: {
-            '@': path.resolve(__dirname, 'src'),
-            '@app': path.resolve(__dirname, 'src/app'),
-            '@pages': path.resolve(__dirname, 'src/pages'),
-            '@widgets': path.resolve(__dirname, 'src/widgets'),
-            '@features': path.resolve(__dirname, 'src/features'),
-            '@entities': path.resolve(__dirname, 'src/entities'),
-            '@shared': path.resolve(__dirname, 'src/shared'),
-        }
     },
 
     output: {
@@ -53,6 +49,10 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             template: './public/index.html',
+        }),
+        new webpack.DefinePlugin({
+            'process.env.API_ENDPOINT': JSON.stringify(envConfig.API_ENDPOINT || 'http://localhost:5000'),
+            'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
         }),
     ],
 
