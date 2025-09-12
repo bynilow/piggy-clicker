@@ -1,4 +1,4 @@
-import coinIconUrl from './coin.png';
-import starImage from './star.png';
+import coinIconUrl from './coin.webp';
+import starImage from './star.webp';
 
 export { coinIconUrl, starImage };

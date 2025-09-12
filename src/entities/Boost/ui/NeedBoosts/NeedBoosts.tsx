@@ -1,4 +1,4 @@
-import { Description, Divider } from '@/shared';
+import { Description, Divider, useBoostsStore, useModal } from '@/shared';
 import { getBoostNameById } from '../../lib';
 import * as S from './NeedBoosts.styles';
 
@@ -7,26 +7,34 @@ interface Props {
 }
 
 const NeedBoosts = ({ needBoosts }: Props) => {
-    return (
-        <S.Wrapper>
-            {needBoosts.map((needBoost, index) => (
-                <>
-                    <S.Boost $haveBoost={Math.random() > 0.5}>
-                        <S.Title>
-                            {getBoostNameById(needBoost.id)}
-                        </S.Title>
-                        <S.Level>
-                            lvl {needBoost.level} <Description>(2)</Description>
-                        </S.Level>
-                    </S.Boost>
+    const { boosts } = useBoostsStore();
 
-                    {
-                        needBoosts.length !== index + 1 && (
-                            <Divider isLight />
-                        )
-                    }
-                </>
-            ))}
+    const { closeModal } = useModal();
+
+    return (
+        <S.Wrapper onClick={closeModal}>
+            {needBoosts.map((needBoost, index) => {
+                const currentLevel = boosts.find(boost => boost.boost_id === needBoost.id)?.boost_level || 0;
+
+                return (
+                    <>
+                        <S.Boost $haveBoost={currentLevel >= needBoost.level}>
+                            <S.Title>
+                                {getBoostNameById(needBoost.id)}
+                            </S.Title>
+                            <S.Level>
+                                {needBoost.level}{" / "}<S.CurrentLevel>{currentLevel}</S.CurrentLevel>
+                            </S.Level>
+                        </S.Boost>
+
+                        {
+                            needBoosts.length !== index + 1 && (
+                                <Divider isLight />
+                            )
+                        }
+                    </>
+                )
+            })}
         </S.Wrapper>
     );
 }

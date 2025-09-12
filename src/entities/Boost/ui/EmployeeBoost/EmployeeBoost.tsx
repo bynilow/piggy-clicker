@@ -1,11 +1,16 @@
-import { Description, getFormattedCoins } from '@/shared';
+import { Description, getFormattedCoins, useBoostsStore } from '@/shared';
 import { ActiveBoostModel, EmployeeBoostModel, PassiveBoostModel } from '../../model';
 import { BoostWrapper } from '../BoostWrapper';
 import * as S from './EmployeeBoost.styles';
 
-const EmployeeBoost = ({ title, level, amount, cost, needToUnblock, imagePath }: EmployeeBoostModel) => {
+const EmployeeBoost = ({ title, amount, cost, needToUnblock, imagePath, id }: EmployeeBoostModel) => {
+    const { boosts } = useBoostsStore();
+
+    const level = boosts.find(boost => boost.boost_id === id)?.boost_level || 0;
+
     return (
         <BoostWrapper
+            id={id}
             title={title}
             cost={cost}
             imagePath={imagePath}

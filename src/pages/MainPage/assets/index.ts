@@ -1,7 +1,7 @@
-import boostIconUrl from './boost.png';
-import homeIconUrl from './home.png';
-import referralsIconUrl from './referrals.png';
-import sendIconUrl from './send.png';
+import boostIconUrl from './boost.webp';
+import homeIconUrl from './home.webp';
+import referralsIconUrl from './referrals.webp';
+import sendIconUrl from './send.webp';
 
 const icons = {
     boostIconUrl, homeIconUrl, referralsIconUrl, sendIconUrl

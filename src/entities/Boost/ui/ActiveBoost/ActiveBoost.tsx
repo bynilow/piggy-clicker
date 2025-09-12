@@ -1,11 +1,16 @@
-import { Description, getFormattedCoins } from '@/shared';
+import { Description, getFormattedCoins, useBoostsStore } from '@/shared';
 import { ActiveBoostModel, PassiveBoostModel } from '../../model';
 import { BoostWrapper } from '../BoostWrapper';
 import * as S from './ActiveBoost.styles';
 
-const ActiveBoost = ({ title, level, amount, cost, needToUnblock, imagePath }: ActiveBoostModel) => {
+const ActiveBoost = ({ title, amount, cost, needToUnblock, imagePath, id }: ActiveBoostModel) => {
+    const { boosts } = useBoostsStore();
+
+    const level = boosts.find(boost => boost.boost_id === id)?.boost_level || 0;
+
     return (
         <BoostWrapper
+            id={id}
             title={title}
             cost={cost}
             imagePath={imagePath}

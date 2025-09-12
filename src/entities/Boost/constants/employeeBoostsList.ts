@@ -6,7 +6,6 @@ const employeeBoostsList: EmployeeBoostModel[] = [
         id: "cleaner",
         title: "Уборщик",
         imagePath: cleanerImage,
-        level: 0,
         amount: 0.1,
         cost: 2250,
         needToUnblock: []
@@ -15,7 +14,6 @@ const employeeBoostsList: EmployeeBoostModel[] = [
         id: "seller",
         title: "Продавец",
         imagePath: sellerImage,
-        level: 0,
         amount: 0.3,
         cost: 6450,
         needToUnblock: []
@@ -24,7 +22,6 @@ const employeeBoostsList: EmployeeBoostModel[] = [
         id: "courier",
         title: "Курьер",
         imagePath: courierImage,
-        level: 21,
         amount: 0.3,
         cost: 7210,
         needToUnblock: []
@@ -33,7 +30,6 @@ const employeeBoostsList: EmployeeBoostModel[] = [
         id: "security",
         title: "Охранник",
         imagePath: securityImage,
-        level: 0,
         amount: 0.8,
         cost: 18580,
         needToUnblock: []
@@ -42,7 +38,6 @@ const employeeBoostsList: EmployeeBoostModel[] = [
         id: "bookkeeper",
         title: "Бухгалтер",
         imagePath: bookkeeperImage,
-        level: 9,
         amount: 1.8,
         cost: 57200,
         needToUnblock: []
@@ -51,7 +46,6 @@ const employeeBoostsList: EmployeeBoostModel[] = [
         id: "administrator",
         title: "Администратор",
         imagePath: administratorImage,
-        level: 0,
         amount: 2.9,
         cost: 77800,
         needToUnblock: []

@@ -8,7 +8,7 @@ import { UserDataResponseDto } from "./types";
 const useUser = (userId?: number, userName?: string) => {
     const queryClient = useQueryClient();
 
-    const { setUser } = useUserStore();
+    const { setUserStore } = useUserStore();
 
     const { data, error, isLoading } = useQuery<UserDataResponseDto, Error>({
         queryKey: [FETCH_USER_QUERY_KEY],
@@ -19,7 +19,7 @@ const useUser = (userId?: number, userName?: string) => {
 
     useEffect(() => {
         if (data) {
-            setUser(data.id, data.username, data.coins);
+            setUserStore(data.id, data.username, data.coins);
         }
     }, [data])
 

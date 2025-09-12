@@ -10,7 +10,8 @@ import { TargetAndTransition, VariantLabels } from 'motion/dist/react';
 import { AnimatePresence, motion } from 'motion/react';
 import { MainPageActionsId } from '../model';
 import { useCoins, useUser } from '@/entities/User';
-import { useUserStore } from '@/shared';
+import { useBoostsStore, useUserStore } from '@/shared';
+import { useBoosts } from '@/entities/Boost/model/useBoosts';
 
 const tabs: Record<MainPageActionsId, JSX.Element> = {
     main: <ClickPage />,
@@ -41,7 +42,7 @@ const MainPage = () => {
 
     const { coins } = useUserStore();
 
-    // console.log(coins)
+    const { perClick } = useBoostsStore();
 
     return (
         <S.Main>
@@ -50,9 +51,10 @@ const MainPage = () => {
                     <S.Balance>
                         {getFormattedCoins(coins || 0)} <CoinIcon />
                     </S.Balance>
-                    <S.AutomaticIncome>
-                        + {getFormattedCoins(22.52)} / сек
-                    </S.AutomaticIncome>
+                    <S.Income>
+                        <div>+{getFormattedCoins(22.52)} / сек</div>
+                        <div>+{getFormattedCoins(perClick)} / тап</div>
+                    </S.Income>
                 </S.BalanceInfo>
 
                 <S.Actions>

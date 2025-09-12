@@ -19,9 +19,11 @@ const Title = styled.div`
 `;
 
 const Level = styled.div`
-    display: flex;
-    align-items: center;
-    gap: 6px;
+    color: var(--text-primary);
+`;
+
+const CurrentLevel = styled.span`
+    color: var(--text-secondary);
 `
 
-export { Wrapper, Boost, Title, Level };
+export { Wrapper, Boost, Title, Level, CurrentLevel };

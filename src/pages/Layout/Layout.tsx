@@ -1,9 +1,12 @@
 import { useUser } from '@/entities/User';
-import { Error, Loader, Modal, useModal, useUserStore } from '@/shared';
-import { useEffect } from 'react';
+import { Error, Loader, Modal, useModal } from '@/shared';
+import { useEffect, useState } from 'react';
 import { createGlobalStyle } from 'styled-components';
 import { MainPage } from '../MainPage';
 import * as S from './Layout.styles';
+import { useBoosts } from '@/entities/Boost';
+import axios from 'axios';
+import { API_ENDPOINT } from '@/shared/constants';
 
 const tg = window.Telegram.WebApp;
 
@@ -44,7 +47,7 @@ const GlobalStyles = createGlobalStyle`
 
 const Layout = () => {
 
-    const { isOpen, closeModal, modalContent } = useModal();
+    const { isOpen, closeModal, modalContent, canCloseOutside } = useModal();
 
     document.addEventListener('contextmenu', function (e) {
         e.preventDefault();
@@ -54,6 +57,7 @@ const Layout = () => {
     const userName = tg?.initDataUnsafe?.user?.username || 'test_user';
 
     const { userData, userError, userIsLoading, createUser } = useUser(userId, userName);
+    const { boostIsLoading, boostsError } = useBoosts();
 
     useEffect(() => {
         if (!userData?.id && !userIsLoading) {
@@ -65,22 +69,46 @@ const Layout = () => {
         tg.ready();
     }, [])
 
-    const canRenderMainPage = userData?.id && !userError && !userIsLoading;
+    const [allUsers, setAllUsers] = useState<{ username: string, coins: number }[]>([]);
+
+    const fetchAllUsers = async () => {
+        const { data } = await axios.get(`${API_ENDPOINT}/api/users`);
+        setAllUsers(data);
+    }
+
+    useEffect(() => {
+        fetchAllUsers();
+    }, []);
+
+    const canRenderMainPage = userData?.id && !userError && !userIsLoading && !boostsError && !boostIsLoading;
 
     return (
         <>
-            <Modal isOpened={isOpen} onClose={closeModal}>
+            <div style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                fontSize: 12,
+                opacity: 0.5
+            }}>
+                {
+                    allUsers.map((user) => (
+                        <div>{user?.username} - {user.coins}</div>
+                    ))
+                }
+            </div>
+            <Modal closeModal={closeModal} isOpened={isOpen} canCloseOutside={canCloseOutside}>
                 {modalContent}
             </Modal>
             <S.Layout>
                 <GlobalStyles />
                 {
-                    userError && (
+                    (userError || boostsError) && (
                         <Error />
                     )
                 }
                 {
-                    userIsLoading && (
+                    (userIsLoading || boostIsLoading) && (
                         <Loader />
                     )
                 }

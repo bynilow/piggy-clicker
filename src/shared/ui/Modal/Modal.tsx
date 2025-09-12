@@ -4,8 +4,9 @@ import { VariantLabels } from 'motion';
 
 interface Props {
     isOpened: boolean;
-    onClose(): void;
     children: React.ReactNode;
+    canCloseOutside?: boolean;
+    closeModal(): void;
 }
 
 const initialStyles: TargetAndTransition | VariantLabels = {
@@ -18,12 +19,12 @@ const targetStyles: TargetAndTransition | VariantLabels = {
     translateY: 0
 };
 
-const Modal = ({ isOpened, onClose, children }: Props) => {
+const Modal = ({ isOpened, children, canCloseOutside = false, closeModal }: Props) => {
     return (
         <AnimatePresence>
             {
                 isOpened && (
-                    <S.Modal as={motion.div} transition={{ bounce: 0 }} initial={initialStyles} animate={targetStyles} exit={initialStyles} onClick={onClose}>
+                    <S.Modal as={motion.div} transition={{ bounce: 0 }} initial={initialStyles} animate={targetStyles} exit={initialStyles} onClick={canCloseOutside ? closeModal : () => null}>
                         <S.Content>
                             {children}
                         </S.Content>

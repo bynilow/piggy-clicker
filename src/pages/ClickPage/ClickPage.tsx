@@ -1,4 +1,4 @@
-import { Divider, useUserStore } from '@/shared';
+import { Divider, useBoostsStore, useDebounce, useUserStore } from '@/shared';
 import { motion } from "motion/react"
 import * as S from './ClickPage.styles';
 import { useState } from 'react';
@@ -9,13 +9,28 @@ import { addCoins, useCoins, useUser } from '@/entities/User';
 const ClickPage = () => {
     const [clicks, setClicks] = useState<any[]>([]);
 
-    const { id } = useUserStore();
+    const { id, addCoinsStore } = useUserStore();
+    const { perClick } = useBoostsStore();
     const { addCoins } = useCoins();
 
+    const [clickedCoins, setClickedCoins] = useState(perClick);
+
+    const sendClickedCoins = () => {
+        addCoins({ user_id: id, coins: clickedCoins });
+        setClickedCoins(perClick);
+    };
+
+    const debounce = useDebounce(sendClickedCoins);
+
     const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
+        //TODO: в отдельный метод
+        const { clientX, clientY } = event;
         const rect = event.currentTarget.getBoundingClientRect();
-        const x = event.clientX - rect.left + CLICK_X_OFFSET;
-        const y = event.clientY - rect.top + CLICK_Y_OFFSET;
+
+        console.log(rect, clientY)
+
+        const x = clientX - rect.x - CLICK_X_OFFSET;
+        const y = clientY - rect.y - CLICK_Y_OFFSET;
 
         const randomRotation = Math.random() * RANDOM_CLICK_ROTATION_DEGREE;
         const isNegativeRotation = Math.random() > 0.5;
@@ -25,9 +40,9 @@ const ClickPage = () => {
 
         const newClick = {
             id: Date.now(),
-            x: x + (isNegativeOffsetX ? randomOffsetX * -1 : randomOffsetX),
-            y: y,
-            text: '+1',
+            x: isNegativeOffsetX ? x + randomOffsetX : x - randomOffsetX, // уже правильные координаты
+            y, // уже правильные координаты
+            text: `+${perClick}`,
             rotation: isNegativeRotation ? randomRotation * -1 : randomRotation,
         };
 
@@ -37,7 +52,9 @@ const ClickPage = () => {
             setClicks(prev => prev.filter(click => click.id !== newClick.id));
         }, 1000);
 
-        addCoins({ user_id: id, coins: 1 });
+        setClickedCoins(prevValue => prevValue + perClick);
+        addCoinsStore(perClick);
+        debounce();
     };
 
     return (
@@ -63,9 +80,9 @@ const ClickPage = () => {
                     {click.text}
                 </S.Click>
             ))}
-            <S.MainButtonWrapper as={motion.div} whileTap={{ scale: 1.05 }} transition={{ duration: 0.5 }} onClick={handleClick}>
-                <S.MainButton src={coinIconUrl} />
-            </S.MainButtonWrapper>
+            <S.ButtonField as={motion.div} whileTap={{ scale: 1.05 }} transition={{ duration: 0.5 }} onClick={handleClick}>
+                <S.ClickButton src={coinIconUrl} />
+            </S.ButtonField>
             <S.LevelWrapper>
                 <Divider />
                 <S.LevelHead>

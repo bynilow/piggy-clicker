@@ -5,12 +5,12 @@ import { ADD_COINS_QUERY_KEY } from "../constants";
 import { AddCoinRequestDto } from "./types";
 
 const useCoins = () => {
-    const { setCoins } = useUserStore();
+    const { setCoinsStore } = useUserStore();
 
     const { mutate, error } = useMutation({
         mutationKey: [ADD_COINS_QUERY_KEY],
         mutationFn: ({ user_id, coins }: AddCoinRequestDto) => addCoins(user_id, coins),
-        onSuccess: (data) => setCoins(data.data.coins),
+        onSuccess: (data) => setCoinsStore(data.data.coins),
     })
 
     return {

@@ -1,5 +1,5 @@
-import { activeBoostsList, PassiveBoost, passiveBoostsList, ActiveBoost, employeeBoostsList, EmployeeBoost } from '@/entities/Boost';
-import { ActionButton } from '@/shared';
+import { activeBoostsList, PassiveBoost, passiveBoostsList, ActiveBoost, employeeBoostsList, EmployeeBoost, useBoosts } from '@/entities/Boost';
+import { ActionButton, Loader } from '@/shared';
 import { ReactElement, useState } from 'react';
 import { BOOSTS_PAGE_ACTIONS } from '../constant';
 import { BoostActionName } from '../model';
@@ -13,9 +13,8 @@ const PassiveBoosts = (
                     <PassiveBoost
                         key={boost.title}
                         imagePath={boost.imagePath}
-                        id=''
+                        id={boost.id}
                         title={boost.title}
-                        level={boost.level}
                         amount={boost.amount}
                         cost={boost.cost}
                         needToUnblock={boost.needToUnblock} />
@@ -27,10 +26,9 @@ const PassiveBoosts = (
                 passiveBoostsList.filter((_, index) => index % 2 !== 0).map(boost => (
                     <PassiveBoost
                         key={boost.title}
-                        id=''
+                        id={boost.id}
                         imagePath={boost.imagePath}
                         title={boost.title}
-                        level={boost.level}
                         amount={boost.amount}
                         cost={boost.cost}
                         needToUnblock={boost.needToUnblock} />
@@ -48,9 +46,8 @@ const ActiveBoosts = (
                     <ActiveBoost
                         key={boost.title}
                         imagePath={boost.imagePath}
-                        id=''
+                        id={boost.id}
                         title={boost.title}
-                        level={boost.level}
                         type={boost.type}
                         amount={boost.amount}
                         cost={boost.cost}
@@ -63,10 +60,9 @@ const ActiveBoosts = (
                 activeBoostsList.filter((_, index) => index % 2 !== 0).map(boost => (
                     <ActiveBoost
                         key={boost.title}
-                        id=''
+                        id={boost.id}
                         imagePath={boost.imagePath}
                         title={boost.title}
-                        level={boost.level}
                         type={boost.type}
                         amount={boost.amount}
                         cost={boost.cost}
@@ -85,9 +81,8 @@ const EmployeeBoosts = (
                     <EmployeeBoost
                         key={boost.title}
                         imagePath={boost.imagePath}
-                        id=''
+                        id={boost.id}
                         title={boost.title}
-                        level={boost.level}
                         amount={boost.amount}
                         cost={boost.cost}
                         needToUnblock={boost.needToUnblock} />
@@ -99,10 +94,9 @@ const EmployeeBoosts = (
                 employeeBoostsList.filter((_, index) => index % 2 !== 0).map(boost => (
                     <EmployeeBoost
                         key={boost.title}
-                        id=''
+                        id={boost.id}
                         imagePath={boost.imagePath}
                         title={boost.title}
-                        level={boost.level}
                         amount={boost.amount}
                         cost={boost.cost}
                         needToUnblock={boost.needToUnblock} />
@@ -125,24 +119,36 @@ const BoostsPage = () => {
         setActiveButton(actionName);
     };
 
+    const { boostIsLoading } = useBoosts();
+
     return (
         <S.Page>
-            <S.ActionsGroup>
-                {
-                    BOOSTS_PAGE_ACTIONS.map((action) => (
-                        <ActionButton
-                            key={action.id}
-                            id={action.id}
-                            title={action.title}
-                            isActive={activeButton === action.id}
-                            onClick={() => handleClickAction(action.id)} />
-                    ))
-                }
-            </S.ActionsGroup>
-            <S.BoostsList>
-                {tabs[activeButton]}
-            </S.BoostsList>
-        </S.Page>
+            {
+                boostIsLoading
+                    ? (
+                        <Loader />
+                    )
+                    : (
+                        <>
+                            <S.ActionsGroup>
+                                {
+                                    BOOSTS_PAGE_ACTIONS.map((action) => (
+                                        <ActionButton
+                                            key={action.id}
+                                            id={action.id}
+                                            title={action.title}
+                                            isActive={activeButton === action.id}
+                                            onClick={() => handleClickAction(action.id)} />
+                                    ))
+                                }
+                            </S.ActionsGroup>
+                            <S.BoostsList>
+                                {tabs[activeButton]}
+                            </S.BoostsList>
+                        </>
+                    )
+            }
+        </S.Page >
     );
 }
 
