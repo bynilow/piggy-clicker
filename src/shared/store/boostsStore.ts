@@ -21,7 +21,7 @@ const useBoostsStore = create<BoostsStore>()((set) => ({
                 return sum + (boost.amount * userBoost.boost_level);
             }
             return sum;
-        }, 0);
+        }, 1);
 
         return {
             perClick

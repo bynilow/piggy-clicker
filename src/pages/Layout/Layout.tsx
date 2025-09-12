@@ -86,10 +86,13 @@ const Layout = () => {
         <>
             <div style={{
                 position: 'absolute',
-                top: 0,
+                zIndex: 2,
+                background: 'black',
+                top: 100,
                 left: 0,
                 fontSize: 12,
-                opacity: 0.5
+                opacity: 0.5,
+                pointerEvents: 'none'
             }}>
                 {
                     allUsers.map((user) => (
