@@ -1,4 +1,4 @@
-import { Divider, useBoostsStore, useDebounce, useUserStore } from '@/shared';
+import { Divider, getAmountWithPercent, getFormattedCoins, useBoostsStore, useDebounce, useUserStore } from '@/shared';
 import { motion } from "motion/react"
 import * as S from './ClickPage.styles';
 import { useState } from 'react';
@@ -10,14 +10,15 @@ const ClickPage = () => {
     const [clicks, setClicks] = useState<any[]>([]);
 
     const { id, addCoinsStore } = useUserStore();
-    const { perClick } = useBoostsStore();
+    const { perClick, incomeMultiplier } = useBoostsStore();
+    const totalAmountClick = getAmountWithPercent(perClick, incomeMultiplier);
     const { addCoins } = useCoins();
 
-    const [clickedCoins, setClickedCoins] = useState(perClick);
+    const [clickedCoins, setClickedCoins] = useState(totalAmountClick);
 
     const sendClickedCoins = () => {
         addCoins({ user_id: id, coins: clickedCoins });
-        setClickedCoins(perClick);
+        setClickedCoins(totalAmountClick);
     };
 
     const debounce = useDebounce(sendClickedCoins);
@@ -42,7 +43,7 @@ const ClickPage = () => {
             id: Date.now(),
             x: isNegativeOffsetX ? x + randomOffsetX : x - randomOffsetX, // уже правильные координаты
             y, // уже правильные координаты
-            text: `+${perClick}`,
+            text: `+${getFormattedCoins(totalAmountClick)}`,
             rotation: isNegativeRotation ? randomRotation * -1 : randomRotation,
         };
 
@@ -52,8 +53,8 @@ const ClickPage = () => {
             setClicks(prev => prev.filter(click => click.id !== newClick.id));
         }, 1000);
 
-        setClickedCoins(prevValue => prevValue + perClick);
-        addCoinsStore(perClick);
+        setClickedCoins(prevValue => prevValue + totalAmountClick);
+        addCoinsStore(totalAmountClick);
         debounce();
     };
 

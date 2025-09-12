@@ -25,6 +25,7 @@ const BalanceInfo = styled.div`
     flex-direction: column;
     align-items: center;
     margin-top: 1.5rem;
+    width: 100%;
 `
 
 const Balance = styled.div`
@@ -38,8 +39,18 @@ const Balance = styled.div`
 const Income = styled.div`
     font-size: 14px;
     color: #a0a0a0;
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr 0.5fr;
     gap: 16px;
+    width: 100%;
+`;
+
+const IncomeProperty = styled.div`
+    border: 1px solid var(--bg-secondary);
+    padding: 8px;
+    border-radius: 16px;
+    display: flex;
+    justify-content: center;
 `;
 
 const Actions = styled.div`
@@ -59,4 +70,4 @@ const Body = styled.div`
     height: 100%;
 `;
 
-export { Main, Balance, Income, Actions, Head, BalanceInfo, Body };
+export { Main, Balance, Income, Actions, Head, BalanceInfo, Body, IncomeProperty };

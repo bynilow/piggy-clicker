@@ -1,5 +1,5 @@
-import { useUser } from '@/entities/User';
-import { Error, Loader, Modal, useModal } from '@/shared';
+import { useCoins, useUser } from '@/entities/User';
+import { Error, getAmountWithPercent, Loader, Modal, useBoostsStore, useModal, useUserStore } from '@/shared';
 import { useEffect, useState } from 'react';
 import { createGlobalStyle } from 'styled-components';
 import { MainPage } from '../MainPage';
@@ -14,6 +14,7 @@ const GlobalStyles = createGlobalStyle`
     :root {
         --text-primary: #fff;
         --text-secondary: #a0a0a0;
+        --bg-secondary: #21222d;
     }
 
     body {
@@ -57,7 +58,10 @@ const Layout = () => {
     const userName = tg?.initDataUnsafe?.user?.username || 'test_user';
 
     const { userData, userError, userIsLoading, createUser } = useUser(userId, userName);
-    const { boostIsLoading, boostsError } = useBoosts();
+    const { boostIsLoading, boostsError, boostsData } = useBoosts();
+    const { perSecond, incomeMultiplier } = useBoostsStore();
+    const { addCoins } = useCoins();
+    const { addCoinsStore } = useUserStore();
 
     useEffect(() => {
         if (!userData?.id && !userIsLoading) {
@@ -68,6 +72,30 @@ const Layout = () => {
     useEffect(() => {
         tg.ready();
     }, [])
+
+    useEffect(() => {
+        let sendInterval: NodeJS.Timeout | null = null;
+        let addInterval: NodeJS.Timeout | null = null;
+
+        const ONE_SECOND = 1000;
+
+        if (boostsData?.length && userData && perSecond && incomeMultiplier) {
+            addInterval = setInterval(() => {
+                addCoinsStore(getAmountWithPercent(perSecond, incomeMultiplier));
+            }, ONE_SECOND)
+
+            sendInterval = setInterval(() => {
+                addCoins({ user_id: userData.id, coins: getAmountWithPercent(perSecond, incomeMultiplier) * 10 })
+            }, ONE_SECOND * 10);
+        }
+
+        return sendInterval && addInterval
+            ? () => {
+                clearInterval(sendInterval);
+                clearInterval(addInterval);
+            }
+            : undefined;
+    }, [boostsData, userData, perSecond, incomeMultiplier])
 
     const [allUsers, setAllUsers] = useState<{ username: string, coins: number }[]>([]);
 
@@ -88,7 +116,7 @@ const Layout = () => {
                 position: 'absolute',
                 zIndex: 2,
                 background: 'black',
-                top: 100,
+                bottom: 100,
                 left: 0,
                 fontSize: 12,
                 opacity: 0.5,

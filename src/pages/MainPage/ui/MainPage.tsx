@@ -1,17 +1,15 @@
+import { useBoostsStore, useUserStore } from '@/shared';
+import { getAmountWithPercent, getFormattedCoins } from '@/shared/lib';
 import { ActionButton, CoinIcon, Divider } from '@/shared/ui';
-import * as S from './Main.styles';
-import { JSX, useState } from 'react';
-import { ClickPage } from '../../ClickPage';
-import { BoostsPage } from '../../BoostsPage/ui';
-import { ReferralsPage } from '../../ReferralsPage/ui';
-import { getFormattedCoins } from '@/shared/lib';
-import { MAIN_PAGE_ACTIONS } from '../constants';
 import { TargetAndTransition, VariantLabels } from 'motion/dist/react';
 import { AnimatePresence, motion } from 'motion/react';
+import { JSX, useState } from 'react';
+import { BoostsPage } from '../../BoostsPage/ui';
+import { ClickPage } from '../../ClickPage';
+import { ReferralsPage } from '../../ReferralsPage/ui';
+import { MAIN_PAGE_ACTIONS } from '../constants';
 import { MainPageActionsId } from '../model';
-import { useCoins, useUser } from '@/entities/User';
-import { useBoostsStore, useUserStore } from '@/shared';
-import { useBoosts } from '@/entities/Boost/model/useBoosts';
+import * as S from './Main.styles';
 
 const tabs: Record<MainPageActionsId, JSX.Element> = {
     main: <ClickPage />,
@@ -42,7 +40,7 @@ const MainPage = () => {
 
     const { coins } = useUserStore();
 
-    const { perClick } = useBoostsStore();
+    const { perClick, incomeMultiplier, perSecond } = useBoostsStore();
 
     return (
         <S.Main>
@@ -52,8 +50,9 @@ const MainPage = () => {
                         {getFormattedCoins(coins || 0)} <CoinIcon />
                     </S.Balance>
                     <S.Income>
-                        <div>+{getFormattedCoins(22.52)} / сек</div>
-                        <div>+{getFormattedCoins(perClick)} / тап</div>
+                        <S.IncomeProperty>+{getFormattedCoins(getAmountWithPercent(perSecond, incomeMultiplier))} / сек</S.IncomeProperty>
+                        <S.IncomeProperty>+{getFormattedCoins(getAmountWithPercent(perClick, incomeMultiplier))} / тап</S.IncomeProperty>
+                        <S.IncomeProperty>+{getFormattedCoins(incomeMultiplier)}%</S.IncomeProperty>
                     </S.Income>
                 </S.BalanceInfo>
 

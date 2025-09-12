@@ -6,7 +6,7 @@ const passiveBoostsList: PassiveBoostModel[] = [
         id: "coffee_shop",
         title: "Кофейня",
         imagePath: coffeeShopImage,
-        amount: 10.4,
+        amount: 0.17,
         cost: 250,
         needToUnblock: []
     },
@@ -14,7 +14,7 @@ const passiveBoostsList: PassiveBoostModel[] = [
         id: "clothing_store",
         title: "Магазин одежды",
         imagePath: clothingStoreImage,
-        amount: 22.9,
+        amount: 0.38,
         cost: 550,
         needToUnblock: [
             { id: 'seller', level: 1 }
@@ -24,7 +24,7 @@ const passiveBoostsList: PassiveBoostModel[] = [
         id: "book_store",
         title: "Книжный магазин",
         imagePath: bookStoreImage,
-        amount: 13.3,
+        amount: 0.22,
         cost: 320,
         needToUnblock: []
     },
@@ -32,7 +32,7 @@ const passiveBoostsList: PassiveBoostModel[] = [
         id: "electronics_store",
         title: "Магазин электроники",
         imagePath: electronicsStoreImage,
-        amount: 45.8,
+        amount: 0.76,
         cost: 1100,
         needToUnblock: [
             { id: 'seller', level: 3 },
@@ -43,7 +43,7 @@ const passiveBoostsList: PassiveBoostModel[] = [
         id: "restaurant",
         title: "Ресторан",
         imagePath: restaurantImage,
-        amount: 81.2,
+        amount: 1.35,
         cost: 1950,
         needToUnblock: [
             { id: 'coffee_shop', level: 7 },
@@ -55,7 +55,7 @@ const passiveBoostsList: PassiveBoostModel[] = [
         id: "supermarket",
         title: "Супермаркет",
         imagePath: supermarketImage,
-        amount: 87.5,
+        amount: 1.45,
         cost: 2100,
         needToUnblock: [
             { id: 'seller', level: 9 },
@@ -67,7 +67,7 @@ const passiveBoostsList: PassiveBoostModel[] = [
         id: "fitness_center",
         title: "Фитнес-центр",
         imagePath: fitnessCenterImage,
-        amount: 70.8,
+        amount: 1.18,
         cost: 1700,
         needToUnblock: []
     },
@@ -75,7 +75,7 @@ const passiveBoostsList: PassiveBoostModel[] = [
         id: "cinema",
         title: "Кинотеатр",
         imagePath: cinemaImage,
-        amount: 79.1,
+        amount: 1.31,
         cost: 1900,
         needToUnblock: [
             { id: 'fast_internet', level: 13 },
@@ -86,7 +86,7 @@ const passiveBoostsList: PassiveBoostModel[] = [
         id: "car_dealership",
         title: "Автосалон",
         imagePath: carDealershipImage,
-        amount: 116.6,
+        amount: 1.94,
         cost: 2800,
         needToUnblock: [
             { id: 'electronics_store', level: 12 }
@@ -96,7 +96,7 @@ const passiveBoostsList: PassiveBoostModel[] = [
         id: "real_estate_agency",
         title: "Агентство недвижимости",
         imagePath: realEstateAgencyImage,
-        amount: 102,
+        amount: 1.7,
         cost: 2450,
         needToUnblock: [
             { id: 'market_insider_tip', level: 2 },
@@ -107,7 +107,7 @@ const passiveBoostsList: PassiveBoostModel[] = [
         id: "tech_startup",
         title: "IT-стартап",
         imagePath: techStartupImage,
-        amount: 150,
+        amount: 2.5,
         cost: 3600,
         needToUnblock: [
             { id: 'electronics_store', level: 17 },
@@ -121,7 +121,7 @@ const passiveBoostsList: PassiveBoostModel[] = [
         id: "shopping_mall",
         title: "Торговый центр",
         imagePath: shoppingMallImage,
-        amount: 129.1,
+        amount: 2.15,
         cost: 3100,
         needToUnblock: [
             { id: "cinema", level: 12, },
@@ -134,7 +134,7 @@ const passiveBoostsList: PassiveBoostModel[] = [
         id: "hotel",
         title: "Отель",
         imagePath: hotelImage,
-        amount: 122.9,
+        amount: 2.04,
         cost: 2950,
         needToUnblock: [
             { id: "restaurant", level: 10, },
@@ -145,7 +145,7 @@ const passiveBoostsList: PassiveBoostModel[] = [
         id: "bank",
         title: "Банк",
         imagePath: bankImage,
-        amount: 216.6,
+        amount: 3.61,
         cost: 5200,
         needToUnblock: [
             { id: "private_jet", level: 2 },
@@ -156,7 +156,7 @@ const passiveBoostsList: PassiveBoostModel[] = [
         id: "skyscraper",
         title: "Небоскрёб",
         imagePath: skyscraperImage,
-        amount: 172.9,
+        amount: 2.8,
         cost: 4150,
         needToUnblock: [
             { id: "coffee_shop", level: 21, },

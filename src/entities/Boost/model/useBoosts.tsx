@@ -9,7 +9,7 @@ const useBoosts = () => {
     const queryClient = useQueryClient();
 
     const { id, removeCoinsStore } = useUserStore();
-    const { setBoostsStore, setPerClickStore } = useBoostsStore();
+    const { setBoostsStore, setPerClickStore, setIncomeMultiplierStore, setPerSecondStore } = useBoostsStore();
 
     const { data, error, isLoading: fetchIsLoading } = useQuery<BoostDto[], Error>({
         queryKey: [FETCH_BOOSTS_QUERY_KEY],
@@ -21,6 +21,8 @@ const useBoosts = () => {
         if (data) {
             setBoostsStore(data);
             setPerClickStore();
+            setIncomeMultiplierStore();
+            setPerSecondStore();
         }
     }, [data]);
 

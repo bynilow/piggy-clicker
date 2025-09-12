@@ -23,7 +23,7 @@ interface Props {
 const BoostWrapper = ({ title, level, cost, needToUnblock, imagePath, children, id }: Props) => {
     const { openModal } = useModal();
 
-    const totalCost = useMemo(() => level === 0 ? cost : level * BASE_COST_MULTIPLIER * cost, [level, cost])
+    const totalCost = useMemo(() => level === 0 ? cost : cost * level * BASE_COST_MULTIPLIER, [level, cost])
 
     const { buyBoost } = useBoosts();
     const { coins } = useUserStore();
