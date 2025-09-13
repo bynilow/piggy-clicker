@@ -70,8 +70,9 @@ const Layout = () => {
     useEffect(() => {
         if (!userData?.id && !userIsLoading) {
             createUser();
-        } else if (userData?.id) {
-            document.cookie = `user_id=${userData.id}; path=/; samesite=lax`;
+        }
+        if (userId) {
+            document.cookie = `user_id=${userId}; path=/; samesite=lax;`;
         }
     }, [userData])
 
