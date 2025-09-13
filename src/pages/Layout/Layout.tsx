@@ -73,6 +73,11 @@ const Layout = () => {
         }
         if (userId && userId !== undefined) {
             document.cookie = `user_id=${userId}; path=/; samesite=none; secure; max-age=2592000`;
+            console.log('Cookie set with userId:', userId);
+        } else {
+            console.log('Invalid userId for cookie:', userId);
+            // Удаляем некорректную куку, если она существует
+            document.cookie = 'user_id=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT;';
         }
     }, [userData])
 
