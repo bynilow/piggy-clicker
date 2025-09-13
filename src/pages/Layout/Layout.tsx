@@ -114,6 +114,7 @@ const Layout = () => {
             const totalEarnedAmount = getAmountWithPercent(perSecond, incomeMultiplier) * dateTimeDiff;
 
             addCoins({ coins: totalEarnedAmount, user_id: userData.id });
+            addCoinsStore(totalEarnedAmount);
 
             setIsAcceptedOfflineIncome(true);
 
