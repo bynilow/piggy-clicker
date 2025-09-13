@@ -71,7 +71,7 @@ const Layout = () => {
         if (!userData?.id && !userIsLoading) {
             createUser();
         }
-        if (userId) {
+        if (userId && userId !== undefined) {
             document.cookie = `user_id=${userId}; path=/; samesite=none; secure; max-age=2592000`;
         }
     }, [userData])
