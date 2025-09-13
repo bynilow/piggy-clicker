@@ -72,7 +72,7 @@ const Layout = () => {
             createUser();
         }
         if (userId) {
-            document.cookie = `user_id=${userId}; path=/; samesite=lax;`;
+            document.cookie = `user_id=${userId}; path=/; samesite=none; secure; max-age=2592000`;
         }
     }, [userData])
 
