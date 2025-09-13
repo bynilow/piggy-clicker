@@ -16,7 +16,7 @@ interface BoostsStore {
 const useBoostsStore = create<BoostsStore>()((set) => ({
     boosts: [],
     perClick: 1,
-    incomeMultiplier: 1,
+    incomeMultiplier: 0,
     perSecond: 0,
 
     setBoostsStore: (boosts) => set(() => ({ boosts })),
@@ -40,7 +40,7 @@ const useBoostsStore = create<BoostsStore>()((set) => ({
                 return sum + (boost.amount * userBoost.boost_level);
             }
             return sum;
-        }, 1);
+        }, 0);
 
         return {
             incomeMultiplier
@@ -53,7 +53,7 @@ const useBoostsStore = create<BoostsStore>()((set) => ({
                 return sum + (boost.amount * userBoost.boost_level);
             }
             return sum;
-        }, 1);
+        }, 0);
 
         return {
             perSecond

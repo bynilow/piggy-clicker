@@ -4,7 +4,8 @@ const networkClient = axios.create({
     baseURL: process.env.API_ENDPOINT,
     headers: {
         "Content-Type": "application/json",
-    }
+    },
+    withCredentials: true,
 });
 
 export { networkClient };

@@ -1,5 +1,5 @@
 import { useCoins, useUser } from '@/entities/User';
-import { Error, getAmountWithPercent, Loader, Modal, useBoostsStore, useModal, useUserStore } from '@/shared';
+import { Error, getAmountWithPercent, Loader, Modal, OfflineIncome, useBoostsStore, useModal, useUserStore } from '@/shared';
 import { useEffect, useState } from 'react';
 import { createGlobalStyle } from 'styled-components';
 import { MainPage } from '../MainPage';
@@ -7,6 +7,7 @@ import * as S from './Layout.styles';
 import { useBoosts } from '@/entities/Boost';
 import axios from 'axios';
 import { API_ENDPOINT } from '@/shared/constants';
+import dayjs from 'dayjs';
 
 const tg = window.Telegram.WebApp;
 
@@ -15,6 +16,7 @@ const GlobalStyles = createGlobalStyle`
         --text-primary: #fff;
         --text-secondary: #a0a0a0;
         --bg-secondary: #21222d;
+        --accent-color: #a9dfd8;
     }
 
     body {
@@ -63,9 +65,13 @@ const Layout = () => {
     const { addCoins } = useCoins();
     const { addCoinsStore } = useUserStore();
 
+    const [isAcceptedOfflineIncome, setIsAcceptedOfflineIncome] = useState(false);
+
     useEffect(() => {
         if (!userData?.id && !userIsLoading) {
             createUser();
+        } else if (userData?.id) {
+            document.cookie = `user_id=${userData.id}; path=/; samesite=lax`;
         }
     }, [userData])
 
@@ -79,7 +85,7 @@ const Layout = () => {
 
         const ONE_SECOND = 1000;
 
-        if (boostsData?.length && userData && perSecond && incomeMultiplier) {
+        if (boostsData?.length && userData && perSecond) {
             addInterval = setInterval(() => {
                 addCoinsStore(getAmountWithPercent(perSecond, incomeMultiplier));
             }, ONE_SECOND)
@@ -95,7 +101,25 @@ const Layout = () => {
                 clearInterval(addInterval);
             }
             : undefined;
-    }, [boostsData, userData, perSecond, incomeMultiplier])
+    }, [boostsData, userData, perSecond, incomeMultiplier]);
+
+    const { openModal } = useModal();
+
+    useEffect(() => {
+        if (userData && perSecond && !isAcceptedOfflineIncome) {
+            const currentDateTime = new Date(new Date().toUTCString().replace('GMT', '')).getTime();
+            const lastVisitedDateTime = new Date(userData.last_visited_date).getTime();
+            const dateTimeDiff = Math.abs(currentDateTime - lastVisitedDateTime) / 1000;
+
+            const totalEarnedAmount = getAmountWithPercent(perSecond, incomeMultiplier) * dateTimeDiff;
+
+            addCoins({ coins: totalEarnedAmount, user_id: userData.id });
+
+            setIsAcceptedOfflineIncome(true);
+
+            openModal(<OfflineIncome earnedCoins={totalEarnedAmount} />, true)
+        }
+    }, [userData, perSecond])
 
     const [allUsers, setAllUsers] = useState<{ username: string, coins: number }[]>([]);
 

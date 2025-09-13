@@ -3,6 +3,8 @@ const LOCALIZATION = {
     TRY_AGAIN_LATER: 'Попробуйте позже',
     LITTLE_MORE: 'Ещё немного',
     PLEASE_WAIT: 'Пожалуйста, подождите',
+    WHILE_YOU_WERE_AWAY: 'Пока вас не было',
+    YOU_EARNED: 'Вы заработали:',
 };
 
 export { LOCALIZATION };
