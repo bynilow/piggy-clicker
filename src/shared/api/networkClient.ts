@@ -5,7 +5,7 @@ const networkClient = axios.create({
     headers: {
         "Content-Type": "application/json",
     },
-    withCredentials: true,
+    withCredentials: false,
 });
 
 export { networkClient };

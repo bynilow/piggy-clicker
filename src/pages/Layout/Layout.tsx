@@ -73,7 +73,7 @@ const Layout = () => {
         }
         if (userId && userId !== undefined) {
             // document.cookie = 'user_id=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT;';
-            document.cookie = `user_id=${userId};`;
+            document.cookie = `user_id=${userId}; path=/; samesite=none`;
             console.log('Cookie set with userId:', userId);
             console.log('cookies if userid exists', document.cookie)
         }
