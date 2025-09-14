@@ -7,7 +7,7 @@ import { JSX, useState } from 'react';
 import { BoostsPage } from '../../BoostsPage/ui';
 import { ClickPage } from '../../ClickPage';
 import { ReferralsPage } from '../../ReferralsPage/ui';
-import { MAIN_PAGE_ACTIONS } from '../constants';
+import { BALANCE_SIZE_MEDIUM_COUNT, BALANCE_SIZE_SMALL_COUNT, MAIN_PAGE_ACTIONS } from '../constants';
 import { MainPageActionsId } from '../model';
 import * as S from './Main.styles';
 
@@ -42,12 +42,19 @@ const MainPage = () => {
 
     const { perClick, incomeMultiplier, perSecond } = useBoostsStore();
 
+    const balanceSize =
+        coins < BALANCE_SIZE_SMALL_COUNT
+            ? coins < BALANCE_SIZE_MEDIUM_COUNT
+                ? 'L'
+                : 'M'
+            : 'S';
+
     return (
         <S.Main>
             <S.Head>
                 <S.BalanceInfo>
-                    <S.Balance>
-                        {getFormattedCoins(coins || 0)} <CoinIcon />
+                    <S.Balance $size={balanceSize}>
+                        {getFormattedCoins(coins || 0, false)} <CoinIcon />
                     </S.Balance>
                     <S.Income>
                         <S.IncomeProperty>+{getFormattedCoins(getAmountWithPercent(perSecond, incomeMultiplier))} / сек</S.IncomeProperty>

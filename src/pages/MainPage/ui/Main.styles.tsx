@@ -23,17 +23,26 @@ const Head = styled.div`
 const BalanceInfo = styled.div`
     display: flex;
     flex-direction: column;
+    gap: 8px;
     align-items: center;
     margin-top: 1.5rem;
     width: 100%;
 `
 
-const Balance = styled.div`
+const balanceSizes = {
+    L: '36px',
+    M: '26px',
+    S: '22px',
+}
+
+const Balance = styled.div<{ $size: 'L' | 'M' | 'S' }>`
     display: flex;
     gap: 8px;
     align-items: center;
-    font-size: 36px;
+    font-size: ${({ $size }) => balanceSizes[$size]};
+    overflow: hidden;
     color: #ffffff;
+    transition: 300ms ease;
 `;
 
 const Income = styled.div`

@@ -1,7 +1,7 @@
-const getFormattedCoins = (coins: number) => {
-    return new Intl.NumberFormat('en-US', {
-        maximumFractionDigits: 2,
-        notation: 'compact',
+const getFormattedCoins = (coins: number, isCompact: boolean = true) => {
+    return new Intl.NumberFormat(isCompact ? 'en-US' : 'ru-RU', {
+        maximumFractionDigits: 1,
+        notation: isCompact ? 'compact' : 'standard',
         compactDisplay: 'short'
     }).format(coins);
 }

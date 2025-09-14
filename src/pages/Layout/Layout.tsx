@@ -1,5 +1,5 @@
 import { useCoins, useUser } from '@/entities/User';
-import { Error, getAmountWithPercent, Loader, Modal, OfflineIncome, useBoostsStore, useModal, useUserStore } from '@/shared';
+import { Error, getAmountWithPercent, getFormattedCoins, Loader, Modal, OfflineIncome, useBoostsStore, useModal, useUserStore } from '@/shared';
 import { useEffect, useState } from 'react';
 import { createGlobalStyle } from 'styled-components';
 import { MainPage } from '../MainPage';
@@ -72,10 +72,7 @@ const Layout = () => {
             createUser();
         }
         if (userId) {
-            // document.cookie = 'user_id=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT;';
             localStorage.user_id = userId;
-            console.log('localstorage set with userId:', userId);
-            console.log('localstorage with userId:', localStorage)
         }
     }, [userData])
 
@@ -137,6 +134,12 @@ const Layout = () => {
 
     useEffect(() => {
         fetchAllUsers();
+
+        const interval = setInterval(() => {
+            fetchAllUsers();
+        }, 5000)
+
+        return () => clearInterval(interval);
     }, []);
 
     const canRenderMainPage = userData?.id && !userError && !userIsLoading && !boostsError && !boostIsLoading;
@@ -155,7 +158,7 @@ const Layout = () => {
             }}>
                 {
                     allUsers.map((user) => (
-                        <div>{user?.username} - {user.coins}</div>
+                        <div>{user?.username} - {getFormattedCoins(user.coins)}</div>
                     ))
                 }
             </div>

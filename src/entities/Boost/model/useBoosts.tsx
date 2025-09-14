@@ -15,6 +15,7 @@ const useBoosts = () => {
         queryKey: [FETCH_BOOSTS_QUERY_KEY],
         queryFn: id ? () => fetchUserBoosts(id) : undefined,
         retry: 1,
+        enabled: !!id
     });
 
     useEffect(() => {
