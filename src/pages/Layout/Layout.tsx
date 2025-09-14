@@ -56,7 +56,7 @@ const Layout = () => {
         e.preventDefault();
     });
 
-    const userId = tg?.initDataUnsafe?.user?.id || 1337;
+    const userId = tg?.initDataUnsafe?.user?.id || 6162278708;
     const userName = tg?.initDataUnsafe?.user?.username || 'test_user';
 
     const { userData, userError, userIsLoading, createUser } = useUser(userId, userName);
