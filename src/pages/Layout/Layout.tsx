@@ -68,9 +68,8 @@ const Layout = () => {
     const [isAcceptedOfflineIncome, setIsAcceptedOfflineIncome] = useState(false);
 
     useEffect(() => {
-        alert(tg.initDataUnsafe.start_param)
         if (!userData?.id && !userIsLoading) {
-            createUser({ user_id: userId, username: userName, reffered_by: 0 });
+            createUser({ user_id: userId, username: userName, reffered_by: Number(tg.initDataUnsafe.start_param) || 0 });
         }
         if (userId) {
             localStorage.user_id = userId;
