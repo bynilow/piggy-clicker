@@ -6,7 +6,7 @@ import { MainPage } from '../MainPage';
 import * as S from './Layout.styles';
 import { useBoosts } from '@/entities/Boost';
 import axios from 'axios';
-import { API_ENDPOINT } from '@/shared/constants';
+import { API_ENDPOINT, MAX_OFFLINE_TIME_IN_SECONDS } from '@/shared/constants';
 import dayjs from 'dayjs';
 
 const tg = window.Telegram.WebApp;
@@ -111,27 +111,20 @@ const Layout = () => {
 
     useEffect(() => {
         if (userData && perSecond && !isAcceptedOfflineIncome && userData.last_visited_date) {
-            const currentDateTime = new Date().getTime();
+            const currentDateTime = new Date(new Date().toUTCString().replace(' GMT', '')).getTime();
             const lastVisitedDateTime = new Date(userData.last_visited_date).getTime();
-            const dateTimeDiff = Math.abs(currentDateTime - lastVisitedDateTime) / 1000;
+            const dateTimeDiffInSeconds = Math.abs(currentDateTime - lastVisitedDateTime) / 1000;
 
-            const totalEarnedAmount = getAmountWithPercent(perSecond, incomeMultiplier) * dateTimeDiff;
+            const totalGoneTimeInSeconds = dateTimeDiffInSeconds > MAX_OFFLINE_TIME_IN_SECONDS ? MAX_OFFLINE_TIME_IN_SECONDS : dateTimeDiffInSeconds;
 
-            //debug
-            console.log('new Date(): ', new Date());
-            console.log('new Date().toUTCString(): ', new Date().toUTCString())
-            console.log(`new Date(new Date().toUTCString().replace('GMT', '')).getTime(): `, new Date(new Date().toUTCString().replace('GMT', '')).getTime());
-            console.log(`userData.last_visited_date: `, userData.last_visited_date);
-            console.log(`new Date(userData.last_visited_date): `, new Date(userData.last_visited_date));
-            console.log(`new Date(userData.last_visited_date).getTime(): `, new Date(userData.last_visited_date).getTime());
-            console.log(`Math.abs(currentDateTime - lastVisitedDateTime) / 1000: `, Math.abs(currentDateTime - lastVisitedDateTime) / 1000);
+            const totalEarnedAmount = getAmountWithPercent(perSecond, incomeMultiplier) * totalGoneTimeInSeconds;
 
             addCoins({ coins: totalEarnedAmount, user_id: userData.id });
             addCoinsStore(totalEarnedAmount);
 
             setIsAcceptedOfflineIncome(true);
 
-            openModal(<OfflineIncome earnedCoins={totalEarnedAmount} />, true)
+            openModal(<OfflineIncome earnedCoins={totalEarnedAmount} timeGoneInSeconds={totalGoneTimeInSeconds} />, true)
         }
     }, [userData, perSecond])
 

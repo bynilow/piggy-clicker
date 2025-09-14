@@ -31,6 +31,11 @@ const Earned = styled.div`
     align-items: center;
     gap: 8px;
     font-size: 64px;
+`;
+
+const TimeGone = styled.div`
+    font-size: 18px;
+    color: var(--text-secondary);
 `
 
-export { Wrapper, Title, TotalIncomeWrapper, TotalIncomeTitle, Earned };
+export { Wrapper, Title, TotalIncomeWrapper, TotalIncomeTitle, Earned, TimeGone };
