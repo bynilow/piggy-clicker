@@ -111,8 +111,8 @@ const Layout = () => {
 
     useEffect(() => {
         if (userData && perSecond && !isAcceptedOfflineIncome && userData.last_visited_date) {
-            const currentDateTime = new Date(new Date().toUTCString().replace(' GMT', '')).getTime();
-            const lastVisitedDateTime = new Date(new Date(userData.last_visited_date).toUTCString()).getTime();
+            const currentDateTime = new Date().getTime();
+            const lastVisitedDateTime = new Date(userData.last_visited_date).getTime();
             const dateTimeDiff = Math.abs(currentDateTime - lastVisitedDateTime) / 1000;
 
             const totalEarnedAmount = getAmountWithPercent(perSecond, incomeMultiplier) * dateTimeDiff;
