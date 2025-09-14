@@ -28,8 +28,6 @@ const ClickPage = () => {
         const { clientX, clientY } = event;
         const rect = event.currentTarget.getBoundingClientRect();
 
-        console.log(rect, clientY)
-
         const x = clientX - rect.x - CLICK_X_OFFSET;
         const y = clientY - rect.y - CLICK_Y_OFFSET;
 
@@ -55,6 +53,7 @@ const ClickPage = () => {
 
         setClickedCoins(prevValue => prevValue + totalAmountClick);
         addCoinsStore(totalAmountClick);
+        window.navigator.vibrate(50);
         debounce();
     };
 
