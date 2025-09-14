@@ -24,7 +24,10 @@ const useUser = (userId?: number, userName?: string) => {
     }, [data])
 
     const { mutate } = useMutation({
-        mutationFn: userId && userName ? () => createUser(userName, userId) : undefined,
+        mutationFn:
+            userId && userName
+                ? ({ username, user_id, reffered_by }: { username: string; user_id: number; reffered_by: number }) => createUser(username, user_id, reffered_by)
+                : undefined,
         onSuccess: () => queryClient.invalidateQueries({ queryKey: [FETCH_USER_QUERY_KEY] }),
     })
 

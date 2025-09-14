@@ -1,10 +1,22 @@
+import { useUserStore } from '@/shared';
 import { CopyIcon } from '../assets';
 import { LOCALIZATION } from '../constants';
 import * as S from './ReferralsPage.styles';
 
 const ReferralsPage = () => {
+    const { id } = useUserStore();
     // TODO: удалить при добавлении сетевого слоя
     const friends = [];
+
+    const handleInvite = () => {
+        const tgShareLink = 'https://t.me/share';
+        const appLink = 'https://t.me/PiggyClickerBot';
+        const text = 'Играй вместе со мной!'
+
+        const url = `${tgShareLink}/url?url=${appLink}?start=${id}&text=${text}`;
+
+        window.Telegram.WebApp.openTelegramLink(url);
+    }
 
     return (
         <S.Page>
@@ -71,8 +83,8 @@ const ReferralsPage = () => {
                     )
                     : <S.EmptyReferrals>
                         {LOCALIZATION.INVITE_FRIENDS}
-                        <S.InviteUrl>
-                            tg.com/clicker/#id
+                        <S.InviteUrl onClick={handleInvite}>
+                            tg.com/clicker/{id}
                             <S.CopyIcon src={CopyIcon} />
                         </S.InviteUrl>
                     </S.EmptyReferrals>

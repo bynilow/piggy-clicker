@@ -53,6 +53,7 @@ const ClickPage = () => {
 
         setClickedCoins(prevValue => prevValue + totalAmountClick);
         addCoinsStore(totalAmountClick);
+        //TODO: переделать под тг
         window.navigator.vibrate(10);
         debounce();
     };

@@ -69,7 +69,8 @@ const Layout = () => {
 
     useEffect(() => {
         if (!userData?.id && !userIsLoading) {
-            createUser();
+            alert(tg.initDataUnsafe.start_param)
+            createUser({ user_id: userId, username: userName, reffered_by: 0 });
         }
         if (userId) {
             localStorage.user_id = userId;
@@ -156,6 +157,9 @@ const Layout = () => {
                 opacity: 0.5,
                 pointerEvents: 'none'
             }}>
+                {
+                    userData?.reffered_by && `Приглашен игроком - ${userData?.reffered_by}`
+                }
                 {
                     allUsers.map((user) => (
                         <div>{user?.username} - {getFormattedCoins(user.coins)}</div>

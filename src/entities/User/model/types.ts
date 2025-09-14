@@ -3,6 +3,7 @@ interface UserDataResponseDto {
     username: string;
     coins: number;
     last_visited_date: Date;
+    reffered_by?: number | null;
 }
 
 interface AddCoinRequestDto {
