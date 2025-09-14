@@ -117,6 +117,14 @@ const Layout = () => {
 
             const totalEarnedAmount = getAmountWithPercent(perSecond, incomeMultiplier) * dateTimeDiff;
 
+            //debug
+            console.log('new Date(): ', new Date());
+            console.log(`new Date(new Date().toUTCString().replace('GMT', '')).getTime(): `, new Date(new Date().toUTCString().replace('GMT', '')).getTime());
+            console.log(`userData.last_visited_date: `, userData.last_visited_date);
+            console.log(`new Date(userData.last_visited_date): `, new Date(userData.last_visited_date));
+            console.log(`new Date(userData.last_visited_date).getTime(): `, new Date(userData.last_visited_date).getTime());
+            console.log(`Math.abs(currentDateTime - lastVisitedDateTime) / 1000: `, Math.abs(currentDateTime - lastVisitedDateTime) / 1000);
+
             addCoins({ coins: totalEarnedAmount, user_id: userData.id });
             addCoinsStore(totalEarnedAmount);
 
