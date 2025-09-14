@@ -71,11 +71,11 @@ const Layout = () => {
         if (!userData?.id && !userIsLoading) {
             createUser();
         }
-        if (userId && userId !== undefined) {
+        if (userId) {
             // document.cookie = 'user_id=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT;';
-            document.cookie = `user_id=${userId}; path=/; secure; samesite=none`;
-            console.log('Cookie set with userId:', userId);
-            console.log('cookies if userid exists', document.cookie)
+            localStorage.user_id = userId;
+            console.log('localstorage set with userId:', userId);
+            console.log('localstorage with userId:', localStorage)
         }
     }, [userData])
 
