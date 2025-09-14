@@ -53,7 +53,7 @@ const ClickPage = () => {
 
         setClickedCoins(prevValue => prevValue + totalAmountClick);
         addCoinsStore(totalAmountClick);
-        window.navigator.vibrate(50);
+        window.navigator.vibrate(10);
         debounce();
     };
 
