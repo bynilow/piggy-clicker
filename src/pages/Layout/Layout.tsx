@@ -56,8 +56,8 @@ const Layout = () => {
         e.preventDefault();
     });
 
-    const userId = tg?.initDataUnsafe?.user?.id || 6162278708;
-    const userName = tg?.initDataUnsafe?.user?.username || 'test_user';
+    const userId = tg?.initDataUnsafe?.user?.id || 55355;
+    const userName = tg?.initDataUnsafe?.user?.username || 'small_id';
 
     const { userData, userError, userIsLoading, createUser } = useUser(userId, userName);
     const { boostIsLoading, boostsError, boostsData } = useBoosts();
