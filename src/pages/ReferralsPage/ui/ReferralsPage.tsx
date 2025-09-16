@@ -37,6 +37,10 @@ const ReferralsPage = () => {
                                     <ReferralCell key={referral.user_id} avatarUrl={referral.avatar_url} incomePerSecond={referral.makeYouPerSecond} username={referral.username} />
                                 ))
                             }
+                            <S.InviteUrl onClick={handleInvite}>
+                                <S.SendIcon src={SendIcon} />
+                                {LOCALIZATION.INVITE}
+                            </S.InviteUrl>
                         </S.FriendList>
                     )
                     : <S.EmptyReferrals>
