@@ -3,7 +3,14 @@ interface UserDataResponseDto {
     username: string;
     coins: number;
     last_visited_date: Date;
-    reffered_by?: number | null;
+    referred_by?: number | null;
+}
+
+interface CreateUserRequestDto {
+    username: string;
+    user_id: number;
+    avatar_url?: string;
+    referred_by?: number;
 }
 
 interface AddCoinRequestDto {
@@ -11,4 +18,4 @@ interface AddCoinRequestDto {
     coins: number;
 }
 
-export type { UserDataResponseDto, AddCoinRequestDto };
+export type { UserDataResponseDto, AddCoinRequestDto, CreateUserRequestDto };

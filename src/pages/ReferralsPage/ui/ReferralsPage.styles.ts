@@ -16,32 +16,6 @@ const FriendList = styled.div`
     width: 100%;
 `;
 
-const FriendCell = styled.div<{ $depthFriend: number }>`
-    display: flex;
-    gap: 16px;
-    background-color: #2b2b36;
-    padding: 16px;
-    border-radius: 16px;
-    font-size: 18px;
-    margin-left: ${({ $depthFriend }) => $depthFriend * 24}px;
-`;
-
-const FriendAvatar = styled.div`
-    width: 50px;
-    aspect-ratio: 1/1;
-    background-color: #a9dfd8;
-`;
-
-const IncomeFromFriend = styled.div`
-    font-size: 14px;
-    color: #a0a0a0;
-`;
-
-const FriendInfo = styled.div`
-    display: flex;
-    flex-direction: column;
-`
-
 const EmptyReferrals = styled.div`
     display: flex;
     flex-direction: column;
@@ -69,4 +43,4 @@ const CopyIcon = styled.img`
     filter: invert(100%);
 `
 
-export { CopyIcon, InviteUrl, EmptyReferrals, Page, FriendInfo, IncomeFromFriend, FriendAvatar, FriendList, FriendCell }
+export { CopyIcon, InviteUrl, EmptyReferrals, Page, FriendList };

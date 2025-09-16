@@ -1,11 +1,13 @@
 import { USERS_ENDPOINT } from "../constants"
 import { networkClient } from "@/shared";
+import { CreateUserRequestDto } from "../model";
 
-const createUser = async (username: string, user_id: number, reffered_by?: number) => {
+const createUser = async ({ user_id, username, avatar_url, referred_by }: CreateUserRequestDto) => {
     return await networkClient.post(USERS_ENDPOINT, {
         user_id,
         username,
-        reffered_by: reffered_by
+        referred_by,
+        avatar_url
     });
 }
 

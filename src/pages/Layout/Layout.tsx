@@ -1,5 +1,5 @@
 import { useCoins, useUser } from '@/entities/User';
-import { Error, getAmountWithPercent, getFormattedCoins, Loader, Modal, OfflineIncome, useBoostsStore, useModal, useUserStore } from '@/shared';
+import { Error, getAmountWithPercent, getFormattedCoins, Loader, Modal, OfflineIncome, useBoostsStore, useModal, useReferralsStore, useUserStore } from '@/shared';
 import { useEffect, useState } from 'react';
 import { createGlobalStyle } from 'styled-components';
 import { MainPage } from '../MainPage';
@@ -8,6 +8,7 @@ import { useBoosts } from '@/entities/Boost';
 import axios from 'axios';
 import { API_ENDPOINT, MAX_OFFLINE_TIME_IN_SECONDS } from '@/shared/constants';
 import dayjs from 'dayjs';
+import { useReferrals } from '@/entities/Referral';
 
 const tg = window.Telegram.WebApp;
 
@@ -61,6 +62,8 @@ const Layout = () => {
 
     const { userData, userError, userIsLoading, createUser } = useUser(userId, userName);
     const { boostIsLoading, boostsError, boostsData } = useBoosts();
+    const { } = useReferrals();
+    const { referrals, referralsTotalPerSecond } = useReferralsStore();
     const { perSecond, incomeMultiplier } = useBoostsStore();
     const { addCoins } = useCoins();
     const { addCoinsStore } = useUserStore();
@@ -69,7 +72,7 @@ const Layout = () => {
 
     useEffect(() => {
         if (!userData?.id && !userIsLoading) {
-            createUser({ user_id: userId, username: userName, reffered_by: Number(tg.initDataUnsafe.start_param) || 0 });
+            createUser({ user_id: userId, username: userName, referred_by: Number(tg.initDataUnsafe.start_param) || 0 });
         }
         if (userId) {
             localStorage.user_id = userId;
@@ -84,16 +87,20 @@ const Layout = () => {
         let sendInterval: NodeJS.Timeout | null = null;
         let addInterval: NodeJS.Timeout | null = null;
 
-        const ONE_SECOND = 1000;
+        const ONE_SECOND_IN_MS = 1000;
+        const TEN_SECOND_IN_MS = 10000;
+        const TEN_SECOND = 10;
 
-        if (boostsData?.length && userData && perSecond) {
+        console.log(boostsData, userData, perSecond, referrals)
+
+        if (boostsData && userData && (perSecond || referrals)) {
             addInterval = setInterval(() => {
-                addCoinsStore(getAmountWithPercent(perSecond, incomeMultiplier));
-            }, ONE_SECOND)
+                addCoinsStore(getAmountWithPercent(perSecond, incomeMultiplier) + referralsTotalPerSecond);
+            }, ONE_SECOND_IN_MS)
 
             sendInterval = setInterval(() => {
-                addCoins({ user_id: userData.id, coins: getAmountWithPercent(perSecond, incomeMultiplier) * 10 })
-            }, ONE_SECOND * 10);
+                addCoins({ user_id: userData.id, coins: (getAmountWithPercent(perSecond, incomeMultiplier) + referralsTotalPerSecond) * TEN_SECOND })
+            }, TEN_SECOND_IN_MS);
         }
 
         return sendInterval && addInterval
@@ -102,19 +109,19 @@ const Layout = () => {
                 clearInterval(addInterval);
             }
             : undefined;
-    }, [boostsData, userData, perSecond, incomeMultiplier]);
+    }, [boostsData, userData, perSecond, incomeMultiplier, referrals]);
 
     const { openModal } = useModal();
 
     useEffect(() => {
-        if (userData && perSecond && !isAcceptedOfflineIncome && userData.last_visited_date) {
+        if (userData && (perSecond || referrals) && !isAcceptedOfflineIncome && userData.last_visited_date) {
             const currentDateTime = new Date().getTime();
             const lastVisitedDateTime = new Date(userData.last_visited_date).getTime();
             const dateTimeDiffInSeconds = Math.abs(currentDateTime - lastVisitedDateTime) / 1000;
 
             const totalGoneTimeInSeconds = dateTimeDiffInSeconds > MAX_OFFLINE_TIME_IN_SECONDS ? MAX_OFFLINE_TIME_IN_SECONDS : dateTimeDiffInSeconds;
 
-            const totalEarnedAmount = getAmountWithPercent(perSecond, incomeMultiplier) * totalGoneTimeInSeconds;
+            const totalEarnedAmount = (getAmountWithPercent(perSecond, incomeMultiplier) + referralsTotalPerSecond) * totalGoneTimeInSeconds;
 
             addCoins({ coins: totalEarnedAmount, user_id: userData.id });
             addCoinsStore(totalEarnedAmount);
@@ -123,7 +130,7 @@ const Layout = () => {
 
             openModal(<OfflineIncome earnedCoins={totalEarnedAmount} timeGoneInSeconds={totalGoneTimeInSeconds} />, true)
         }
-    }, [userData, perSecond])
+    }, [userData, perSecond, referrals])
 
     const [allUsers, setAllUsers] = useState<{ username: string, coins: number }[]>([]);
 
@@ -157,7 +164,7 @@ const Layout = () => {
                 pointerEvents: 'none'
             }}>
                 {
-                    userData?.reffered_by && `Приглашен игроком - ${userData?.reffered_by}`
+                    userData?.referred_by && `Приглашен игроком - ${userData?.referred_by}`
                 }
                 {
                     allUsers.map((user) => (

@@ -3,7 +3,7 @@ import { createUser, fetchUserData } from "../api";
 import { FETCH_USER_QUERY_KEY } from "../constants";
 import { useEffect, useRef } from "react";
 import { useUserStore } from "@/shared";
-import { UserDataResponseDto } from "./types";
+import { CreateUserRequestDto, UserDataResponseDto } from "./types";
 
 const useUser = (userId?: number, userName?: string) => {
     const queryClient = useQueryClient();
@@ -26,7 +26,7 @@ const useUser = (userId?: number, userName?: string) => {
     const { mutate } = useMutation({
         mutationFn:
             userId && userName
-                ? ({ username, user_id, reffered_by }: { username: string; user_id: number; reffered_by: number }) => createUser(username, user_id, reffered_by)
+                ? ({ username, user_id, referred_by, avatar_url }: CreateUserRequestDto) => createUser({ username, user_id, referred_by, avatar_url })
                 : undefined,
         onSuccess: () => queryClient.invalidateQueries({ queryKey: [FETCH_USER_QUERY_KEY] }),
     })
