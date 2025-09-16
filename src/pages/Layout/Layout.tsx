@@ -72,7 +72,7 @@ const Layout = () => {
 
     useEffect(() => {
         if (!userData?.id && !userIsLoading) {
-            createUser({ user_id: userId, username: userName, referred_by: Number(tg.initDataUnsafe.start_param) || 0 });
+            createUser({ user_id: userId, username: userName, referred_by: Number(tg.initDataUnsafe.start_param) || 0, avatar_url: tg.initDataUnsafe.user?.photo_url });
         }
         if (userId) {
             localStorage.user_id = userId;
