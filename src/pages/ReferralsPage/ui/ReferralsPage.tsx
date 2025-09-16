@@ -1,5 +1,5 @@
 import { Description, Error, Loader, useReferralsStore, useUserStore } from '@/shared';
-import { CopyIcon } from '../assets';
+import { CopyIcon, SendIcon } from '../assets';
 import { APP_LINK, LOCALIZATION, TG_SHARE_LINK } from '../constants';
 import * as S from './ReferralsPage.styles';
 import { ReferralCell, useReferrals } from '@/entities/Referral';
@@ -10,7 +10,7 @@ const ReferralsPage = () => {
     const { referrals, referralsTotalPerSecond } = useReferralsStore();
 
     const handleInvite = () => {
-        const url = `${TG_SHARE_LINK}/url?url=${APP_LINK}/?startapp=${id}&text=${LOCALIZATION.PLAY_WITH_ME}`;
+        const url = `${TG_SHARE_LINK}/url?url=${APP_LINK}/?start=${id}&text=${LOCALIZATION.PLAY_WITH_ME}`;
 
         window.Telegram.WebApp.openTelegramLink(url);
     }
@@ -42,8 +42,8 @@ const ReferralsPage = () => {
                     : <S.EmptyReferrals>
                         {LOCALIZATION.INVITE_FRIENDS}
                         <S.InviteUrl onClick={handleInvite}>
-                            tg.com/clicker/{id}
-                            <S.CopyIcon src={CopyIcon} />
+                            <S.SendIcon src={SendIcon} />
+                            {LOCALIZATION.INVITE}
                         </S.InviteUrl>
                     </S.EmptyReferrals>
             }

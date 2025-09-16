@@ -37,10 +37,10 @@ const InviteUrl = styled.div`
     border-radius: 16px;
 `;
 
-const CopyIcon = styled.img`
-    height: 18px;
+const SendIcon = styled.img`
+    height: 24px;
     aspect-ratio: 1/1;
     filter: invert(100%);
 `
 
-export { CopyIcon, InviteUrl, EmptyReferrals, Page, FriendList };
+export { SendIcon, InviteUrl, EmptyReferrals, Page, FriendList };
