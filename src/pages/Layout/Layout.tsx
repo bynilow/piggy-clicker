@@ -57,6 +57,9 @@ const Layout = () => {
         e.preventDefault();
     });
 
+    const urlParams = new URLSearchParams(window.location.search);
+    const referredBy = Number(urlParams.get("referred")) || 0;
+
     const userId = tg?.initDataUnsafe?.user?.id || 1337;
     const userName = tg?.initDataUnsafe?.user?.username || 'test_user';
 
@@ -72,7 +75,7 @@ const Layout = () => {
 
     useEffect(() => {
         if (!userData?.id && !userIsLoading) {
-            createUser({ user_id: userId, username: userName, referred_by: Number(tg.initDataUnsafe.start_param) || 0, avatar_url: tg.initDataUnsafe.user?.photo_url });
+            createUser({ user_id: userId, username: userName, referred_by: referredBy, avatar_url: tg.initDataUnsafe.user?.photo_url });
         }
         if (userId) {
             localStorage.user_id = userId;
