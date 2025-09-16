@@ -114,7 +114,7 @@ const Layout = () => {
     const { openModal } = useModal();
 
     useEffect(() => {
-        if (userData && (perSecond || referrals) && !isAcceptedOfflineIncome && userData.last_visited_date) {
+        if (userData && (perSecond || referrals?.length) && !isAcceptedOfflineIncome && userData.last_visited_date) {
             const currentDateTime = new Date().getTime();
             const lastVisitedDateTime = new Date(userData.last_visited_date).getTime();
             const dateTimeDiffInSeconds = Math.abs(currentDateTime - lastVisitedDateTime) / 1000;
