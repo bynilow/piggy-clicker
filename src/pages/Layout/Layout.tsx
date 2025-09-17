@@ -142,39 +142,10 @@ const Layout = () => {
         setAllUsers(data);
     }
 
-    useEffect(() => {
-        fetchAllUsers();
-
-        const interval = setInterval(() => {
-            fetchAllUsers();
-        }, 5000)
-
-        return () => clearInterval(interval);
-    }, []);
-
     const canRenderMainPage = userData?.id && !userError && !userIsLoading && !boostsError && !boostIsLoading;
 
     return (
         <>
-            <div style={{
-                position: 'absolute',
-                zIndex: 2,
-                background: 'black',
-                bottom: 100,
-                left: 0,
-                fontSize: 12,
-                opacity: 0.5,
-                pointerEvents: 'none'
-            }}>
-                {
-                    userData?.referred_by && `Приглашен игроком - ${userData?.referred_by}`
-                }
-                {
-                    allUsers.map((user) => (
-                        <div>{user?.username} - {getFormattedCoins(user.coins)}</div>
-                    ))
-                }
-            </div>
             <Modal closeModal={closeModal} isOpened={isOpen} canCloseOutside={canCloseOutside}>
                 {modalContent}
             </Modal>

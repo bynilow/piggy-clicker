@@ -37,15 +37,15 @@ const Dropdown = ({ onSelect, values, isLoading, isError }: Props) => {
             exit={initialAnimation}>
 
             {
-                isLoading && <Loader />
+                isLoading && <Loader isModal />
             }
 
             {
-                isError && <Error />
+                !isLoading && isError && <Error />
             }
 
             {
-                values && values.length === 0 && LOCALIZATION.NOTHING_FOUND
+                !isLoading && !isError && values && values.length === 0 && LOCALIZATION.NOTHING_FOUND
             }
 
             {

@@ -9,11 +9,11 @@ const Loader = styled.div`
     align-items: center;
 `;
 
-const Dots = styled.div`
+const Dots = styled.div<{ $size: 'S' | 'M' }>`
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 100px;
+    font-size: ${({ $size }) => $size === 'M' ? '100px' : '30px'};
 `
 
 const pointAnimation = keyframes`

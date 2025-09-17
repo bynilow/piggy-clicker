@@ -23,14 +23,16 @@ const UserAvatar = styled.img`
 
 const Dropdown = styled.div`
     position: absolute;
-    z-index: 2;
+    z-index: 10;
     bottom: calc(100% + 8px);
     left: 0;
     display: flex;
     flex-direction: column;
     gap: 16px;
     width: 100%;
-    max-height: 250px;
+    max-height: 200px;
+    height: fit-content;
+    min-height: 50px;
     padding: 16px;
     font-size: 18px;
     color: var(--text-secondary);

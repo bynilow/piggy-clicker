@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { LOCALIZATION } from '../constants';
 import * as S from './SendPage.styles'
-import { CoinIcon, Dropdown, Loader, useUserStore } from '@/shared';
+import { CoinIcon, Dropdown, Loader, useDebounce, useUserStore } from '@/shared';
 import { coinIconUrl, userImage } from '@/shared/assets';
 import { AnimatePresence, LegacyAnimationControls, motion, TargetAndTransition, VariantLabels } from 'motion/react';
 import { fetchAllUsers, useCoins, UserDataResponseDto, useUser, useUsers } from '@/entities/User';
@@ -18,7 +18,15 @@ const SendPage = () => {
         setAmountToSend(inputValue > coins ? Number(coins.toFixed(1)) : inputValue);
     }
 
-    const { usersData, usersError, usersIsLoading } = useUsers(Boolean(whoRecipient.username), whoRecipient.username);
+    const { id } = useUserStore();
+
+    const [usernameForFetch, setUsernameForFetch] = useState('');
+
+    const debounceFetchUsers = useDebounce((username: string) => {
+        setUsernameForFetch(username)
+    });
+
+    const { usersData, usersError, usersIsLoading } = useUsers(Boolean(usernameForFetch), usernameForFetch);
 
     const { sendCoins, isSendCoinsPending } = useCoins();
 
@@ -29,6 +37,8 @@ const SendPage = () => {
             id: '',
             username: event.currentTarget.value
         });
+
+        debounceFetchUsers(event.currentTarget.value);
     }
 
     const handleSelectUser = (user: UserDataResponseDto) => {
@@ -39,8 +49,10 @@ const SendPage = () => {
         setIsDropdownOpened(false);
     }
 
-    const handleSendCoins = () => {
-        sendCoins({ send_to_id: Number(whoRecipient.id), coins: amountToSend });
+    const handleSendCoins = async () => {
+        await sendCoins({ send_to_id: Number(whoRecipient.id), coins: amountToSend });
+        setWhoRecipient({ id: '', username: '' });
+        setAmountToSend(0);
     }
 
     return (
@@ -56,7 +68,10 @@ const SendPage = () => {
                             type='number'
                             placeholder={LOCALIZATION.ENTER_AMOUNT}
                             value={amountToSend || ''}
-                            onChange={handleChangeAmountInput} />
+                            onChange={handleChangeAmountInput}
+                            onFocus={(event) => {
+                                event.currentTarget.scrollIntoView({ behavior: 'smooth' })
+                            }} />
                         <S.IconWrapper>
                             <S.Icon src={coinIconUrl} />
                         </S.IconWrapper>
@@ -67,14 +82,21 @@ const SendPage = () => {
                     <S.InputWrapper>
                         <AnimatePresence>
                             {
-                                whoRecipient.username && isDropdownOpened && (
-                                    <Dropdown values={usersData} isError={!!usersError} isLoading={usersIsLoading} onSelect={handleSelectUser} />
+                                whoRecipient.username.replace('@', '') && isDropdownOpened && (
+                                    <Dropdown
+                                        values={usersData?.filter(user => user.id !== id)}
+                                        isError={!!usersError}
+                                        isLoading={usersIsLoading || usernameForFetch !== whoRecipient.username}
+                                        onSelect={handleSelectUser} />
                                 )
                             }
                         </AnimatePresence>
                         <S.Input
                             placeholder={LOCALIZATION.ENTER_WHO}
-                            onFocus={() => setIsDropdownOpened(true)}
+                            onFocus={(event) => {
+                                event.currentTarget.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                setIsDropdownOpened(true);
+                            }}
                             onBlur={() => setTimeout(() => setIsDropdownOpened(false), 100)}
                             onChange={handleChangeRecipientInput}
                             value={whoRecipient.username} />
@@ -90,7 +112,7 @@ const SendPage = () => {
                 whileTap={{ scale: 0.90 }}
                 disabled={!whoRecipient.id || !amountToSend || isSendCoinsPending}
                 onClick={handleSendCoins}>
-                {isSendCoinsPending ? <Loader /> : LOCALIZATION.TRANSFER_COINS}
+                {isSendCoinsPending ? <Loader size='S' /> : LOCALIZATION.TRANSFER_COINS}
             </S.ButtonSend>
         </S.Page>
     );

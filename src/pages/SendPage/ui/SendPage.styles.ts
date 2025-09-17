@@ -6,8 +6,10 @@ const Page = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
+    gap: 32px;
     width: 100%;
     height: 100%;
+    overflow: auto;
 `;
 
 const Form = styled.div`
@@ -28,7 +30,7 @@ const InputContent = styled.div`
     gap: 8px;
     padding: 16px;
     border-radius: 16px;
-    font-size: 18px;
+    font-size: 16px;
     background-color: var(--bg-secondary);
     width: 100%;
 `;
@@ -71,7 +73,7 @@ const Input = styled.input`
     border-bottom: 1px solid var(--text-secondary);
     background-color: transparent;
     color: var(--text-primary);
-    font-size: 24px;
+    font-size: 18px;
     width: 100%;
     transition: ease ${DEFAULT_ANIMATION_DURATION_MS}ms;
 
@@ -95,6 +97,10 @@ const Input = styled.input`
 
 const ButtonSend = styled.button`
     padding: 16px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border: none;
     background-color: var(--accent-color);
     border-radius: 16px;

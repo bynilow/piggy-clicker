@@ -7,9 +7,10 @@ const FIRST_TEXT_DURATION_MS = 9000;
 
 interface Props {
     isModal?: boolean;
+    size?: 'S' | 'M';
 }
 
-const Loader = ({ isModal }: Props) => {
+const Loader = ({ isModal, size = 'M' }: Props) => {
 
     const [haveSecondText, setHaveSecondText] = useState(false);
 
@@ -23,7 +24,7 @@ const Loader = ({ isModal }: Props) => {
 
     return (
         <S.Loader>
-            <S.Dots>
+            <S.Dots $size={size}>
                 <S.Point $index={0}>
                     .
                 </S.Point>
