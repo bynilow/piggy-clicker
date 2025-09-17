@@ -14,6 +14,8 @@ const FriendList = styled.div`
     flex-direction: column;
     gap: 16px;
     width: 100%;
+    height: 100%;
+    overflow: scroll;
 `;
 
 const EmptyReferrals = styled.div`

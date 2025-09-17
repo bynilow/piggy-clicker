@@ -24,12 +24,13 @@ const UserAvatar = styled.img`
 const Dropdown = styled.div`
     position: absolute;
     z-index: 10;
-    bottom: calc(100% + 8px);
+    top: 0;
     left: 0;
+    margin: 16px;
     display: flex;
     flex-direction: column;
     gap: 16px;
-    width: 100%;
+    width: calc(100% - 32px);
     max-height: 200px;
     height: fit-content;
     min-height: 50px;
@@ -39,7 +40,17 @@ const Dropdown = styled.div`
     background-color: var(--bg-secondary);
     border-radius: 16px;
     border: 1px solid var(--text-secondary);
-    overflow: auto;
+    overflow: scroll;
 `;
 
-export { Dropdown, UserDropdownItem, UserAvatar };
+const DropdownShadow = styled.div`
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: black;
+    width: 100%;
+    height: 30%;
+    filter: blur(15px);
+`
+
+export { Dropdown, UserDropdownItem, UserAvatar, DropdownShadow };

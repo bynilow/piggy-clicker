@@ -94,7 +94,10 @@ const SendPage = () => {
                         </AnimatePresence>
                         <S.Input
                             placeholder={LOCALIZATION.ENTER_WHO}
-                            onFocus={() => setIsDropdownOpened(true)}
+                            onFocus={(event) => {
+                                event.currentTarget.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                setIsDropdownOpened(true);
+                            }}
                             onBlur={() => setTimeout(() => setIsDropdownOpened(false), 100)}
                             onChange={handleChangeRecipientInput}
                             value={whoRecipient.username} />

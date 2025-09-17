@@ -4,6 +4,7 @@ import { UserDataResponseDto } from '@/entities/User';
 import { Loader } from '../Loader';
 import { Error } from '../Error';
 import { LOCALIZATION } from '@/shared/constants';
+import ReactDOM from 'react-dom';
 
 const initialAnimation: TargetAndTransition | VariantLabels = {
     opacity: 0,
@@ -15,12 +16,6 @@ const animateAnimation: TargetAndTransition | VariantLabels = {
     y: 0
 }
 
-interface ItemProps {
-    id: string | number;
-    text: string;
-    image_url?: string;
-}
-
 interface Props {
     onSelect(value: UserDataResponseDto): void;
     values?: UserDataResponseDto[];
@@ -29,35 +24,44 @@ interface Props {
 }
 
 const Dropdown = ({ onSelect, values, isLoading, isError }: Props) => {
-    return (
-        <S.Dropdown
-            as={motion.div}
-            animate={animateAnimation}
-            initial={initialAnimation}
-            exit={initialAnimation}>
 
-            {
-                isLoading && <Loader isModal />
-            }
+    return ReactDOM.createPortal(
+        <>
+            <S.Dropdown
+                as={motion.div}
+                animate={animateAnimation}
+                initial={initialAnimation}
+                exit={initialAnimation}>
 
-            {
-                !isLoading && isError && <Error />
-            }
+                {
+                    isLoading && <Loader isModal />
+                }
 
-            {
-                !isLoading && !isError && values && values.length === 0 && LOCALIZATION.NOTHING_FOUND
-            }
+                {
+                    !isLoading && isError && <Error />
+                }
 
-            {
-                !isLoading && !isError && values && values.length !== 0 && values.map(value => (
-                    <S.UserDropdownItem key={value.id} onClick={() => onSelect(value)}>
-                        <S.UserAvatar src={value.avatar_url} />
-                        {value.username}
-                    </S.UserDropdownItem>
-                ))
-            }
-        </S.Dropdown>
-    );
+                {
+                    !isLoading && !isError && values && values.length === 0 && LOCALIZATION.NOTHING_FOUND
+                }
+
+                {
+                    !isLoading && !isError && values && values.length !== 0 && values.map(value => (
+                        <S.UserDropdownItem key={value.id} onClick={() => onSelect(value)}>
+                            <S.UserAvatar src={value.avatar_url} />
+                            {value.username}
+                        </S.UserDropdownItem>
+                    ))
+                }
+            </S.Dropdown>
+            <S.DropdownShadow
+                as={motion.div}
+                animate={animateAnimation}
+                initial={initialAnimation}
+                exit={initialAnimation} />
+        </>,
+        document.getElementById('dropdown-root') as HTMLElement
+    )
 }
 
 export { Dropdown };

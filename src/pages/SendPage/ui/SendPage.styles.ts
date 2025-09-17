@@ -8,8 +8,6 @@ const Page = styled.div`
     justify-content: space-between;
     gap: 32px;
     width: 100%;
-    height: 100%;
-    overflow: auto;
 `;
 
 const Form = styled.div`

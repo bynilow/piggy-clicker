@@ -7,7 +7,6 @@ const Page = styled.div`
     gap: 16px;
     width: 100%;
     height: 100%;
-    overflow: scroll;
 `;
 
 const BoostsList = styled.div`
