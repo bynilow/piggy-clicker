@@ -27,11 +27,12 @@ const Dropdown = styled.div`
     top: 0;
     left: 0;
     margin: 16px;
+    margin-top: 58px;
     display: flex;
     flex-direction: column;
     gap: 16px;
     width: calc(100% - 32px);
-    max-height: 200px;
+    max-height: 250px;
     height: fit-content;
     min-height: 50px;
     padding: 16px;
@@ -40,17 +41,8 @@ const Dropdown = styled.div`
     background-color: var(--bg-secondary);
     border-radius: 16px;
     border: 1px solid var(--text-secondary);
-    overflow: scroll;
+    overflow: auto;
+    box-shadow: 0px 12px 25px 25px rgba(0, 0, 0, 0.7);
 `;
 
-const DropdownShadow = styled.div`
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-color: black;
-    width: 100%;
-    height: 30%;
-    filter: blur(15px);
-`
-
-export { Dropdown, UserDropdownItem, UserAvatar, DropdownShadow };
+export { Dropdown, UserDropdownItem, UserAvatar };

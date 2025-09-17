@@ -26,40 +26,33 @@ interface Props {
 const Dropdown = ({ onSelect, values, isLoading, isError }: Props) => {
 
     return ReactDOM.createPortal(
-        <>
-            <S.Dropdown
-                as={motion.div}
-                animate={animateAnimation}
-                initial={initialAnimation}
-                exit={initialAnimation}>
+        <S.Dropdown
+            as={motion.div}
+            animate={animateAnimation}
+            initial={initialAnimation}
+            exit={initialAnimation}>
 
-                {
-                    isLoading && <Loader isModal />
-                }
+            {
+                isLoading && <Loader isModal />
+            }
 
-                {
-                    !isLoading && isError && <Error />
-                }
+            {
+                !isLoading && isError && <Error />
+            }
 
-                {
-                    !isLoading && !isError && values && values.length === 0 && LOCALIZATION.NOTHING_FOUND
-                }
+            {
+                !isLoading && !isError && values && values.length === 0 && LOCALIZATION.NOTHING_FOUND
+            }
 
-                {
-                    !isLoading && !isError && values && values.length !== 0 && values.map(value => (
-                        <S.UserDropdownItem key={value.id} onClick={() => onSelect(value)}>
-                            <S.UserAvatar src={value.avatar_url} />
-                            {value.username}
-                        </S.UserDropdownItem>
-                    ))
-                }
-            </S.Dropdown>
-            <S.DropdownShadow
-                as={motion.div}
-                animate={animateAnimation}
-                initial={initialAnimation}
-                exit={initialAnimation} />
-        </>,
+            {
+                !isLoading && !isError && values && values.length !== 0 && values.map(value => (
+                    <S.UserDropdownItem key={value.id} onClick={() => onSelect(value)}>
+                        <S.UserAvatar src={value.avatar_url} />
+                        {value.username}
+                    </S.UserDropdownItem>
+                ))
+            }
+        </S.Dropdown>,
         document.getElementById('dropdown-root') as HTMLElement
     )
 }
