@@ -24,7 +24,7 @@ const UserAvatar = styled.img`
 const Dropdown = styled.div`
     position: absolute;
     z-index: 2;
-    top: calc(100% + 16px);
+    bottom: calc(100% + 8px);
     left: 0;
     display: flex;
     flex-direction: column;
