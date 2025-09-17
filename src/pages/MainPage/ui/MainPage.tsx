@@ -10,12 +10,13 @@ import { ReferralsPage } from '../../ReferralsPage/ui';
 import { BALANCE_SIZE_MEDIUM_COUNT, BALANCE_SIZE_SMALL_COUNT, MAIN_PAGE_ACTIONS } from '../constants';
 import { MainPageActionsId } from '../model';
 import * as S from './Main.styles';
+import { SendPage } from '@/pages/SendPage';
 
 const tabs: Record<MainPageActionsId, JSX.Element> = {
     main: <ClickPage />,
     boosts: <BoostsPage />,
     referrals: <ReferralsPage />,
-    send: <></>
+    send: <SendPage />
 }
 
 const initialStyles: TargetAndTransition | VariantLabels = {

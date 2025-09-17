@@ -5,6 +5,7 @@ const LOCALIZATION = {
     PLEASE_WAIT: 'Пожалуйста, подождите',
     WHILE_YOU_WERE_AWAY: 'Пока вас не было',
     YOU_EARNED: 'Вы заработали:',
+    NOTHING_FOUND: 'Ничего не найдено'
 };
 
 export { LOCALIZATION };

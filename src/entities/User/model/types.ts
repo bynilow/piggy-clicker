@@ -1,6 +1,7 @@
 interface UserDataResponseDto {
     id: number;
     username: string;
+    avatar_url?: string;
     coins: number;
     last_visited_date: Date;
     referred_by?: number | null;
@@ -18,4 +19,9 @@ interface AddCoinRequestDto {
     coins: number;
 }
 
-export type { UserDataResponseDto, AddCoinRequestDto, CreateUserRequestDto };
+interface SendCoinsRequestDto {
+    send_to_id: number;
+    coins: number;
+}
+
+export type { UserDataResponseDto, AddCoinRequestDto, CreateUserRequestDto, SendCoinsRequestDto };

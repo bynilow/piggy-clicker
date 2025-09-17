@@ -29,6 +29,7 @@ const Point = styled.span<{ $index: number }>`
     /* animation-delay: ; */
     transform: translateY(5px);
     animation: ${pointAnimation} 1s ease infinite alternate ${({ $index }) => $index * 250}ms;
+    color: var(--text-primary);
 `
 
 export { Loader, Point, Dots };

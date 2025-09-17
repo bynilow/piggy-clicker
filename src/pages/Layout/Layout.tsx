@@ -24,9 +24,6 @@ const GlobalStyles = createGlobalStyle`
         box-sizing: border-box;
         margin: 0;
         padding: 0;
-        font-family: "Nunito", sans-serif;
-        font-optical-sizing: auto;
-        font-style: normal;
         color: #fff;
     }
 
@@ -34,6 +31,9 @@ const GlobalStyles = createGlobalStyle`
         box-sizing: border-box;
         touch-action: manipulation;
         user-select: none;
+        font-family: "Nunito", sans-serif;
+        font-optical-sizing: auto;
+        font-style: normal;
 
         &::-webkit-scrollbar { width: 0; }
     }
