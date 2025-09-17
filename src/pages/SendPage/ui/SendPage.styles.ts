@@ -108,7 +108,8 @@ const ButtonSend = styled.button`
     width: 100%;
     cursor: pointer;
     transition: ${DEFAULT_ANIMATION_DURATION_MS}ms;
-
+    -webkit-tap-highlight-color: transparent;
+    
     &:disabled {
         background-color: var(--bg-secondary);
         color: var(--text-secondary);

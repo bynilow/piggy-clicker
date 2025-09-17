@@ -38,8 +38,7 @@ const Dropdown = styled.div`
     color: var(--text-secondary);
     background-color: var(--bg-secondary);
     border-radius: 16px;
-    border: 1px solid var(--accent-color);
-    box-shadow: 0px 0px 10px 2px rgba(169, 223, 216, 0.3);
+    border: 1px solid var(--text-secondary);
     overflow: auto;
 `;
 

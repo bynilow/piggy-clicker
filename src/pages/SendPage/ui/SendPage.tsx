@@ -61,23 +61,24 @@ const SendPage = () => {
                 <S.Title>
                     {LOCALIZATION.SEND}
                 </S.Title>
-                <S.InputContent>
+                <S.InputContent
+                    onClick={(event) => event.currentTarget.scrollIntoView({ behavior: 'smooth', block: 'end' })}>
+
                     {LOCALIZATION.SEND_AMOUNT}
                     <S.InputWrapper>
                         <S.Input
                             type='number'
                             placeholder={LOCALIZATION.ENTER_AMOUNT}
                             value={amountToSend || ''}
-                            onChange={handleChangeAmountInput}
-                            onFocus={(event) => {
-                                event.currentTarget.scrollIntoView({ behavior: 'smooth' })
-                            }} />
+                            onChange={handleChangeAmountInput} />
                         <S.IconWrapper>
                             <S.Icon src={coinIconUrl} />
                         </S.IconWrapper>
                     </S.InputWrapper>
                 </S.InputContent>
-                <S.InputContent>
+                <S.InputContent
+                    onClick={(event) => event.currentTarget.scrollIntoView({ behavior: 'smooth', block: 'end' })}>
+
                     {LOCALIZATION.WHO_ARE_SENDING}
                     <S.InputWrapper>
                         <AnimatePresence>
@@ -93,10 +94,7 @@ const SendPage = () => {
                         </AnimatePresence>
                         <S.Input
                             placeholder={LOCALIZATION.ENTER_WHO}
-                            onFocus={(event) => {
-                                event.currentTarget.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                                setIsDropdownOpened(true);
-                            }}
+                            onFocus={() => setIsDropdownOpened(true)}
                             onBlur={() => setTimeout(() => setIsDropdownOpened(false), 100)}
                             onChange={handleChangeRecipientInput}
                             value={whoRecipient.username} />
