@@ -1,8 +1,8 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { addCoins, sendCoins as sendCoinsApi } from "../api";
-import { ADD_COINS_QUERY_KEY, FETCH_USER_QUERY_KEY, LOCALIZATION } from "../constants";
+import { ADD_COINS_QUERY_KEY, FETCH_SENDING_HISTORY_QUERY_KEY, FETCH_USER_QUERY_KEY, LOCALIZATION } from "../constants";
 import { AddCoinRequestDto, SendCoinsRequestDto } from "./types";
-import { useModal, useUserStore } from "@/shared";
+import { Error, useModal, useUserStore } from "@/shared";
 
 const useCoins = () => {
     const { mutate: mutateAddCoins, error: errorAddCoins } = useMutation({
@@ -19,9 +19,12 @@ const useCoins = () => {
     const { mutate: sendCoins, error: errorSendCoins, isPending: isSendCoinsPending } = useMutation({
         mutationFn: ({ send_to_id, coins }: SendCoinsRequestDto) => sendCoinsApi({ send_to_id, coins }),
         onSuccess: (_, variables) => {
-            // queryClient.invalidateQueries({ queryKey: [FETCH_USER_QUERY_KEY] });
+            queryClient.invalidateQueries({ queryKey: [FETCH_SENDING_HISTORY_QUERY_KEY] });
             removeCoinsStore(variables.coins);
             openModal(LOCALIZATION.COINS_SEND_SUCCESS, true);
+        },
+        onError: () => {
+            openModal(<Error />, true);
         }
     });
 

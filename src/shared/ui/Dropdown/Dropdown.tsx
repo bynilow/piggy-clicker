@@ -8,7 +8,7 @@ import ReactDOM from 'react-dom';
 
 const initialAnimation: TargetAndTransition | VariantLabels = {
     opacity: 0,
-    y: -20
+    y: -10
 }
 
 const animateAnimation: TargetAndTransition | VariantLabels = {

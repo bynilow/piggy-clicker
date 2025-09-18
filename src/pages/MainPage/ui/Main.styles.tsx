@@ -25,7 +25,6 @@ const BalanceInfo = styled.div`
     flex-direction: column;
     gap: 8px;
     align-items: center;
-    margin-top: 1.5rem;
     width: 100%;
 `
 

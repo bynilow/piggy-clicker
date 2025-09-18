@@ -27,7 +27,6 @@ const Dropdown = styled.div`
     top: 0;
     left: 0;
     margin: 16px;
-    margin-top: 58px;
     display: flex;
     flex-direction: column;
     gap: 16px;

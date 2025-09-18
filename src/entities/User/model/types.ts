@@ -24,4 +24,19 @@ interface SendCoinsRequestDto {
     coins: number;
 }
 
-export type { UserDataResponseDto, AddCoinRequestDto, CreateUserRequestDto, SendCoinsRequestDto };
+interface FetchSendHistoryResponseDto {
+    date: string;
+    operations: {
+        id: number;
+        is_sending: boolean;
+        time: string;
+        coins: number;
+        user: {
+            username: string;
+            avatar?: string;
+        }
+    }[];
+}
+
+
+export type { UserDataResponseDto, AddCoinRequestDto, CreateUserRequestDto, SendCoinsRequestDto, FetchSendHistoryResponseDto };

@@ -7,7 +7,6 @@ import * as S from './Layout.styles';
 import { useBoosts } from '@/entities/Boost';
 import axios from 'axios';
 import { API_ENDPOINT, MAX_OFFLINE_TIME_IN_SECONDS } from '@/shared/constants';
-import dayjs from 'dayjs';
 import { useReferrals } from '@/entities/Referral';
 
 const tg = window.Telegram.WebApp;
@@ -18,6 +17,8 @@ const GlobalStyles = createGlobalStyle`
         --text-secondary: #a0a0a0;
         --bg-secondary: #21222d;
         --accent-color: #a9dfd8;
+        --green-color: #38b000;
+        --red-color: #da7065;
     }
 
     body {

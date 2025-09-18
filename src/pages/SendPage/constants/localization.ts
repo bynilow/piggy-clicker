@@ -5,6 +5,7 @@ const LOCALIZATION = {
     ENTER_AMOUNT: 'Введите сумму',
     ENTER_WHO: 'Введите кому',
     TRANSFER_COINS: 'Перевести',
+    YOUR_TRANSFERS_HERE: 'Тут будут ваши переводы',
 };
 
 export { LOCALIZATION };
