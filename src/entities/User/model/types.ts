@@ -29,7 +29,7 @@ interface FetchSendHistoryResponseDto {
     operations: {
         id: number;
         is_sending: boolean;
-        time: string;
+        full_date_time: string;
         coins: number;
         user: {
             username: string;

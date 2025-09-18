@@ -43,7 +43,7 @@ const History = () => {
                                             {operation.is_sending ? '-' : '+'} {getFormattedCoins(operation.coins)} <CoinIcon />
                                         </S.Amount>
                                         <S.Time>
-                                            {operation.time}
+                                            {new Date(operation.full_date_time).toLocaleTimeString().slice(0, -3)}
                                         </S.Time>
                                     </S.AmountAndTime>
                                 </S.HistoryItem>
