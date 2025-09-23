@@ -9,7 +9,6 @@ const root = createRoot(container!);
 
 const queryClient = new QueryClient();
 
-
 root.render(
     <ModalProvider>
         <QueryClientProvider client={queryClient}>
