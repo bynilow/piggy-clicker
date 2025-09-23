@@ -21,12 +21,19 @@ const Head = styled.div`
 `
 
 const BalanceInfo = styled.div`
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: 8px;
     align-items: center;
     width: 100%;
 `
+
+const LeadersButtonWrapper = styled.div`
+    position: absolute;
+    top: 0;
+    right: 0;
+`;
 
 const balanceSizes = {
     L: '36px',
@@ -62,11 +69,14 @@ const IncomeProperty = styled.div`
 `;
 
 const Actions = styled.div`
-    width: 100%;
+    width: calc(100% + 32px);
+    padding: 0 16px;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 120px);
     grid-template-rows: 1;
     gap: 14px;
+    overflow-y: scroll;
+    /* margin: 0 -16px; */
 `;
 
 const Body = styled.div`
@@ -78,4 +88,4 @@ const Body = styled.div`
     height: 100%;
 `;
 
-export { Main, Balance, Income, Actions, Head, BalanceInfo, Body, IncomeProperty };
+export { Main, Balance, Income, Actions, Head, BalanceInfo, Body, IncomeProperty, LeadersButtonWrapper };

@@ -8,3 +8,4 @@ export * from './Error';
 export * from './LoaderModal';
 export * from './OfflineIncome';
 export * from './Dropdown';
+export * from './Page';

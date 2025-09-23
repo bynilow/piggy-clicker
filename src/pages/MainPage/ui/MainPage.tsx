@@ -1,3 +1,4 @@
+import { SendPage } from '@/pages/SendPage';
 import { useBoostsStore, useUserStore } from '@/shared';
 import { getAmountWithPercent, getFormattedCoins } from '@/shared/lib';
 import { ActionButton, CoinIcon, Divider } from '@/shared/ui';
@@ -10,13 +11,14 @@ import { ReferralsPage } from '../../ReferralsPage/ui';
 import { BALANCE_SIZE_MEDIUM_COUNT, BALANCE_SIZE_SMALL_COUNT, MAIN_PAGE_ACTIONS } from '../constants';
 import { MainPageActionsId } from '../model';
 import * as S from './Main.styles';
-import { SendPage } from '@/pages/SendPage';
+import { LeadersPage } from '@/pages/LeadersPage';
 
 const tabs: Record<MainPageActionsId, JSX.Element> = {
     main: <ClickPage />,
     boosts: <BoostsPage />,
     referrals: <ReferralsPage />,
-    send: <SendPage />
+    send: <SendPage />,
+    leaders: <LeadersPage />,
 }
 
 const initialStyles: TargetAndTransition | VariantLabels = {
@@ -35,7 +37,9 @@ const MainPage = () => {
     const [activeButton, setActiveButton] = useState<MainPageActionsId>('main');
 
 
-    const handleClickAction = (actionName: MainPageActionsId) => {
+    const handleClickAction = (actionName: MainPageActionsId, event: React.MouseEvent<HTMLDivElement>) => {
+        event.currentTarget.scrollIntoView({ behavior: 'smooth', inline: 'center' });
+
         setActiveButton(actionName);
     }
 
@@ -73,7 +77,7 @@ const MainPage = () => {
                                 title={action.title}
                                 iconUrl={action.iconUrl}
                                 isActive={activeButton === action.id}
-                                onClick={() => handleClickAction(action.id)} />
+                                onClick={(event) => handleClickAction(action.id, event)} />
                         ))
                     }
                 </S.Actions>
@@ -99,3 +103,4 @@ const MainPage = () => {
 }
 
 export { MainPage };
+

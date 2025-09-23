@@ -6,7 +6,7 @@ interface ActionButtonProps {
     title: string;
     isActive?: boolean;
     iconUrl?: string;
-    onClick?(): void;
+    onClick?(event: React.MouseEvent<HTMLDivElement>): void;
 }
 
 const ActionButton = ({ title, isActive, onClick, iconUrl }: ActionButtonProps) => {

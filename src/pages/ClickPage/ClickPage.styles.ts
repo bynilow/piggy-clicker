@@ -1,16 +1,5 @@
 import styled from "styled-components";
 
-const Page = styled.div`
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: end;
-    align-items: center;
-    gap: 16px;
-    width: 100%;
-    height: 100%;
-`;
-
 const ButtonField = styled.div`
     position: relative;
     width: 100%;
@@ -66,4 +55,4 @@ const Click = styled.div`
     font-weight: bold;
 `
 
-export { ButtonField, Click, Page, ClickButton, LevelWrapper, LevelName, LevelCount, LevelLine, LevelHead, ClickWrapper };
+export { ButtonField, Click, ClickButton, LevelWrapper, LevelName, LevelCount, LevelLine, LevelHead, ClickWrapper };

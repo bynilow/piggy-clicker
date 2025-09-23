@@ -1,19 +1,11 @@
 import styled from "styled-components";
 
-const Page = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
-    width: 100%;
-    height: 100%;
-`;
-
 const BoostsList = styled.div`
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 16px;
     width: 100%;
+    overflow: scroll;
 `;
 
 const ActionsGroup = styled.div`
@@ -30,4 +22,4 @@ const Column = styled.div`
     gap: 16px;
 `;
 
-export { ActionsGroup, Page, BoostsList, Column };
+export { ActionsGroup, BoostsList, Column };

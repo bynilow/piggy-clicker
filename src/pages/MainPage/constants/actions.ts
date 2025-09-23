@@ -22,6 +22,11 @@ const MAIN_PAGE_ACTIONS = [
         title: 'Перевести',
         iconUrl: icons.sendIconUrl
     },
+    {
+        id: 'leaders',
+        title: 'Топ',
+        iconUrl: icons.starIconUrl
+    },
 ] as const;
 
 export { MAIN_PAGE_ACTIONS };

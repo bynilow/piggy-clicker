@@ -4,3 +4,4 @@ export * from './fetchAllUsers';
 export * from './addCoins';
 export * from './sendCoins';
 export * from './fetchSendHistory';
+export * from './fetchLeaders';

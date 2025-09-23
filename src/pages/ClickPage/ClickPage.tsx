@@ -1,4 +1,4 @@
-import { Divider, getAmountWithPercent, getFormattedCoins, useBoostsStore, useDebounce, useUserStore } from '@/shared';
+import { Divider, getAmountWithPercent, getFormattedCoins, Page, useBoostsStore, useDebounce, useUserStore } from '@/shared';
 import { motion } from "motion/react"
 import * as S from './ClickPage.styles';
 import { useState } from 'react';
@@ -59,7 +59,7 @@ const ClickPage = () => {
     };
 
     return (
-        <S.Page>
+        <Page>
             {clicks.map(click => (
                 <S.Click as={motion.div}
                     key={click.id}
@@ -96,7 +96,7 @@ const ClickPage = () => {
                 </S.LevelHead>
                 <S.LevelLine />
             </S.LevelWrapper>
-        </S.Page>
+        </Page>
     );
 }
 

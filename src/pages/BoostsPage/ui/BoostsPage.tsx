@@ -1,5 +1,5 @@
 import { activeBoostsList, PassiveBoost, passiveBoostsList, ActiveBoost, employeeBoostsList, EmployeeBoost, useBoosts } from '@/entities/Boost';
-import { ActionButton, Loader } from '@/shared';
+import { ActionButton, Loader, Page } from '@/shared';
 import { ReactElement, useState } from 'react';
 import { BOOSTS_PAGE_ACTIONS } from '../constant';
 import { BoostActionName } from '../model';
@@ -122,7 +122,7 @@ const BoostsPage = () => {
     const { boostIsLoading } = useBoosts();
 
     return (
-        <S.Page>
+        <Page>
             {
                 boostIsLoading
                     ? (
@@ -148,7 +148,7 @@ const BoostsPage = () => {
                         </>
                     )
             }
-        </S.Page >
+        </Page >
     );
 }
 

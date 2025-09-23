@@ -19,6 +19,9 @@ const GlobalStyles = createGlobalStyle`
         --accent-color: #a9dfd8;
         --green-color: #38b000;
         --red-color: #da7065;
+        --gold-color: #ffd700;
+        --silver-color: #f2f2f2;
+        --bronze-color: #cd7f32;
     }
 
     body {

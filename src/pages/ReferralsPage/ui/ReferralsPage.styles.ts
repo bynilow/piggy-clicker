@@ -1,13 +1,10 @@
 import styled from "styled-components";
 
-const Page = styled.div`
+const Content = styled.div`
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 16px;
-    width: 100%;
-    height: 100%;
-`;
+    justify-content: space-between;
+`
 
 const FriendList = styled.div`
     display: flex;
@@ -45,4 +42,4 @@ const SendIcon = styled.img`
     filter: invert(100%);
 `
 
-export { SendIcon, InviteUrl, EmptyReferrals, Page, FriendList };
+export { SendIcon, InviteUrl, EmptyReferrals, FriendList, Content };
