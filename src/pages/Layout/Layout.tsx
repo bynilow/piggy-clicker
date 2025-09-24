@@ -17,11 +17,19 @@ const GlobalStyles = createGlobalStyle`
         --text-secondary: #a0a0a0;
         --bg-secondary: #21222d;
         --accent-color: #a9dfd8;
+
         --green-color: #38b000;
         --red-color: #da7065;
+
         --gold-color: #ffd700;
         --silver-color: #f2f2f2;
         --bronze-color: #cd7f32;
+
+        --common-color: #fff;
+        --rare-color: #fff;
+        --mythical-color: #fff;
+        --legendary-color: #fff;
+
     }
 
     body {
@@ -138,13 +146,6 @@ const Layout = () => {
             openModal(<OfflineIncome earnedCoins={totalEarnedAmount} timeGoneInSeconds={totalGoneTimeInSeconds} />, true)
         }
     }, [userData, perSecond, referrals])
-
-    const [allUsers, setAllUsers] = useState<{ username: string, coins: number }[]>([]);
-
-    const fetchAllUsers = async () => {
-        const { data } = await axios.get(`${API_ENDPOINT}/api/users`);
-        setAllUsers(data);
-    }
 
     const canRenderMainPage = userData?.id && !userError && !userIsLoading && !boostsError && !boostIsLoading;
 

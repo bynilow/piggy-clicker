@@ -1,3 +1,5 @@
+import { Rare } from "@/shared";
+
 interface NeedToUnblock {
     id: string;
     level: number;
@@ -5,6 +7,7 @@ interface NeedToUnblock {
 
 interface PassiveBoostModel {
     id: string;
+    rare: Rare;
     title: string;
     imagePath?: string;
     amount: number;
@@ -14,6 +17,7 @@ interface PassiveBoostModel {
 
 interface ActiveBoostModel {
     id: string;
+    rare: Rare;
     title: string;
     imagePath?: string;
     type: 'click';
@@ -24,6 +28,7 @@ interface ActiveBoostModel {
 
 interface EmployeeBoostModel {
     id: string;
+    rare: Rare;
     title: string;
     imagePath?: string;
     amount: number;

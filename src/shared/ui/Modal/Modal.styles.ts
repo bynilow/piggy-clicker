@@ -16,6 +16,9 @@ const Modal = styled.div`
 
 const Content = styled.div`
     padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 `;
 
 export { Modal, Content };

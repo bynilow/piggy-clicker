@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Boost = styled.div`
+const Boost = styled.div<{ $rareColor: string }>`
     position: relative;
     background-color: #2b2b36;
     padding: 16px;
@@ -11,6 +11,17 @@ const Boost = styled.div`
     justify-content: space-between;
     gap: 8px;
     overflow: hidden;
+
+    &::after {
+        content: '';
+        position: absolute;
+        top: -70px;
+        left: -70px;
+        background-color: ${({ $rareColor }) => $rareColor};
+        width: 100px;
+        height: 100px;
+        rotate: -45deg;
+    }
 `;
 
 const Info = styled.div`

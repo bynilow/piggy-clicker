@@ -8,7 +8,7 @@ const Main = styled.div`
 
     width: 100%;
     height: 100%;
-    padding: 16px;
+    padding: 0 16px;
 `;
 
 const Head = styled.div`
@@ -72,11 +72,10 @@ const Actions = styled.div`
     width: calc(100% + 32px);
     padding: 0 16px;
     display: grid;
-    grid-template-columns: repeat(5, 120px);
+    grid-template-columns: repeat(5, 100px);
     grid-template-rows: 1;
     gap: 14px;
     overflow-y: scroll;
-    /* margin: 0 -16px; */
 `;
 
 const Body = styled.div`

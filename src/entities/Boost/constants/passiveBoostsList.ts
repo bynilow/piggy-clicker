@@ -3,7 +3,8 @@ import { PassiveBoostModel } from "../model";
 
 const passiveBoostsList: PassiveBoostModel[] = [
     {
-        id: "coffee_shop",
+        id: "coffee_shop" as const,
+        rare: 'common',
         title: "Кофейня",
         imagePath: coffeeShopImage,
         amount: 0.17,
@@ -11,7 +12,8 @@ const passiveBoostsList: PassiveBoostModel[] = [
         needToUnblock: []
     },
     {
-        id: "clothing_store",
+        id: "clothing_store" as const,
+        rare: 'common',
         title: "Магазин одежды",
         imagePath: clothingStoreImage,
         amount: 0.38,
@@ -21,7 +23,8 @@ const passiveBoostsList: PassiveBoostModel[] = [
         ]
     },
     {
-        id: "book_store",
+        id: "book_store" as const,
+        rare: 'common',
         title: "Книжный магазин",
         imagePath: bookStoreImage,
         amount: 0.22,
@@ -29,7 +32,8 @@ const passiveBoostsList: PassiveBoostModel[] = [
         needToUnblock: []
     },
     {
-        id: "electronics_store",
+        id: "electronics_store" as const,
+        rare: 'rare',
         title: "Магазин электроники",
         imagePath: electronicsStoreImage,
         amount: 0.76,
@@ -40,7 +44,8 @@ const passiveBoostsList: PassiveBoostModel[] = [
         ]
     },
     {
-        id: "restaurant",
+        id: "restaurant" as const,
+        rare: 'rare',
         title: "Ресторан",
         imagePath: restaurantImage,
         amount: 1.35,
@@ -52,7 +57,8 @@ const passiveBoostsList: PassiveBoostModel[] = [
         ]
     },
     {
-        id: "supermarket",
+        id: "supermarket" as const,
+        rare: 'mythical',
         title: "Супермаркет",
         imagePath: supermarketImage,
         amount: 1.45,
@@ -64,7 +70,8 @@ const passiveBoostsList: PassiveBoostModel[] = [
         ]
     },
     {
-        id: "fitness_center",
+        id: "fitness_center" as const,
+        rare: 'rare',
         title: "Фитнес-центр",
         imagePath: fitnessCenterImage,
         amount: 1.18,
@@ -72,7 +79,8 @@ const passiveBoostsList: PassiveBoostModel[] = [
         needToUnblock: []
     },
     {
-        id: "cinema",
+        id: "cinema" as const,
+        rare: 'rare',
         title: "Кинотеатр",
         imagePath: cinemaImage,
         amount: 1.31,
@@ -83,7 +91,8 @@ const passiveBoostsList: PassiveBoostModel[] = [
         ]
     },
     {
-        id: "car_dealership",
+        id: "car_dealership" as const,
+        rare: 'mythical',
         title: "Автосалон",
         imagePath: carDealershipImage,
         amount: 1.94,
@@ -93,7 +102,8 @@ const passiveBoostsList: PassiveBoostModel[] = [
         ]
     },
     {
-        id: "real_estate_agency",
+        id: "real_estate_agency" as const,
+        rare: 'rare',
         title: "Агентство недвижимости",
         imagePath: realEstateAgencyImage,
         amount: 1.7,
@@ -104,8 +114,9 @@ const passiveBoostsList: PassiveBoostModel[] = [
         ]
     },
     {
-        id: "tech_startup",
+        id: "tech_startup" as const,
         title: "IT-стартап",
+        rare: 'legendary',
         imagePath: techStartupImage,
         amount: 2.5,
         cost: 3600,
@@ -118,8 +129,9 @@ const passiveBoostsList: PassiveBoostModel[] = [
         ]
     },
     {
-        id: "shopping_mall",
+        id: "shopping_mall" as const,
         title: "Торговый центр",
+        rare: 'mythical',
         imagePath: shoppingMallImage,
         amount: 2.15,
         cost: 3100,
@@ -131,8 +143,9 @@ const passiveBoostsList: PassiveBoostModel[] = [
         ]
     },
     {
-        id: "hotel",
+        id: "hotel" as const,
         title: "Отель",
+        rare: 'mythical',
         imagePath: hotelImage,
         amount: 2.04,
         cost: 2950,
@@ -142,8 +155,9 @@ const passiveBoostsList: PassiveBoostModel[] = [
         ]
     },
     {
-        id: "bank",
+        id: "bank" as const,
         title: "Банк",
+        rare: 'legendary',
         imagePath: bankImage,
         amount: 3.61,
         cost: 5200,
@@ -153,8 +167,9 @@ const passiveBoostsList: PassiveBoostModel[] = [
         ]
     },
     {
-        id: "skyscraper",
+        id: "skyscraper" as const,
         title: "Небоскрёб",
+        rare: 'legendary',
         imagePath: skyscraperImage,
         amount: 2.8,
         cost: 4150,
@@ -164,6 +179,6 @@ const passiveBoostsList: PassiveBoostModel[] = [
             { id: 'cleaner', level: 23 }
         ]
     }
-];
+] as const;
 
 export { passiveBoostsList };

@@ -3,7 +3,7 @@ import { ActiveBoostModel, PassiveBoostModel } from '../../model';
 import { BoostWrapper } from '../BoostWrapper';
 import * as S from './ActiveBoost.styles';
 
-const ActiveBoost = ({ title, amount, cost, needToUnblock, imagePath, id }: ActiveBoostModel) => {
+const ActiveBoost = ({ title, rare, amount, cost, needToUnblock, imagePath, id }: ActiveBoostModel) => {
     const { boosts } = useBoostsStore();
 
     const level = boosts.find(boost => boost.boost_id === id)?.boost_level || 0;
@@ -11,6 +11,7 @@ const ActiveBoost = ({ title, amount, cost, needToUnblock, imagePath, id }: Acti
     return (
         <BoostWrapper
             id={id}
+            rare={rare}
             title={title}
             cost={cost}
             imagePath={imagePath}

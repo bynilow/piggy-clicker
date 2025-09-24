@@ -11,7 +11,7 @@ const BoostsList = styled.div`
 const ActionsGroup = styled.div`
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     grid-template-rows: 1;
     gap: 14px;
 `;

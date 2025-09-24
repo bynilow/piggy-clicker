@@ -4,6 +4,7 @@ import { ActiveBoostModel } from "../model";
 const activeBoostsList: ActiveBoostModel[] = [
     {
         id: "cup_coffee",
+        rare: 'common',
         title: "Кружка кофе",
         imagePath: cupCoffeeImage,
         type: 'click',
@@ -13,6 +14,7 @@ const activeBoostsList: ActiveBoostModel[] = [
     },
     {
         id: "powerful_pc",
+        rare: 'rare',
         title: "Мощный компьютер",
         imagePath: powerfulPcImage,
         type: 'click',
@@ -22,6 +24,7 @@ const activeBoostsList: ActiveBoostModel[] = [
     },
     {
         id: "fast_internet",
+        rare: 'common',
         title: "Быстрый интернет",
         imagePath: fastInternetImage,
         type: 'click',
@@ -31,6 +34,7 @@ const activeBoostsList: ActiveBoostModel[] = [
     },
     {
         id: "market_insider_tip",
+        rare: 'mythical',
         title: "Инсайдерская информация",
         imagePath: insiderTipImage,
         type: 'click',
@@ -40,6 +44,7 @@ const activeBoostsList: ActiveBoostModel[] = [
     },
     {
         id: "private_jet",
+        rare: 'legendary',
         title: "Частный самолет",
         imagePath: privateJetImage,
         type: 'click',

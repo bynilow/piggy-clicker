@@ -24,7 +24,7 @@ const ReferralsPage = () => {
     }
 
     return (
-        <Page>
+        <Page $justifyContent='start'>
             <S.Content>
                 {
                     referrals?.length

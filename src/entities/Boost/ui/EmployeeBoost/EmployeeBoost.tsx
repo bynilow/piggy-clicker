@@ -3,7 +3,7 @@ import { ActiveBoostModel, EmployeeBoostModel, PassiveBoostModel } from '../../m
 import { BoostWrapper } from '../BoostWrapper';
 import * as S from './EmployeeBoost.styles';
 
-const EmployeeBoost = ({ title, amount, cost, needToUnblock, imagePath, id }: EmployeeBoostModel) => {
+const EmployeeBoost = ({ title, rare, amount, cost, needToUnblock, imagePath, id }: EmployeeBoostModel) => {
     const { boosts } = useBoostsStore();
 
     const level = boosts.find(boost => boost.boost_id === id)?.boost_level || 0;
@@ -11,6 +11,7 @@ const EmployeeBoost = ({ title, amount, cost, needToUnblock, imagePath, id }: Em
     return (
         <BoostWrapper
             id={id}
+            rare={rare}
             title={title}
             cost={cost}
             imagePath={imagePath}

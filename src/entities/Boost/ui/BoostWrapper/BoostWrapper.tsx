@@ -1,5 +1,5 @@
-import { CoinIcon, Divider, getFormattedCoins, LoaderModal, useBoostsStore, useModal, useUserStore } from '@/shared';
-import { BASE_COST_MULTIPLIER } from '@/shared/constants';
+import { CoinIcon, Divider, getFormattedCoins, LoaderModal, Rare, useBoostsStore, useModal, useUserStore } from '@/shared';
+import { BASE_COST_MULTIPLIER, RARE_COLORS } from '@/shared/constants';
 import { motion } from 'motion/react';
 import { useMemo } from 'react';
 import { lockIconUrl } from '../../assets';
@@ -12,6 +12,7 @@ import { useUser } from '@/entities/User';
 
 interface Props {
     id: string;
+    rare: Rare;
     title: string;
     level: number;
     cost: number;
@@ -20,7 +21,7 @@ interface Props {
     children: React.ReactNode;
 }
 
-const BoostWrapper = ({ title, level, cost, needToUnblock, imagePath, children, id }: Props) => {
+const BoostWrapper = ({ title, rare, level, cost, needToUnblock, imagePath, children, id }: Props) => {
     const { openModal } = useModal();
 
     const totalCost = useMemo(() => level === 0 ? cost : cost * level * BASE_COST_MULTIPLIER, [level, cost])
@@ -52,7 +53,12 @@ const BoostWrapper = ({ title, level, cost, needToUnblock, imagePath, children, 
 
     return (
         <>
-            <S.Boost onClick={handleClickBoost} as={motion.div} transition={{ duration: 0.3 }} whileTap={canBuy || isNeedToUnblock ? { scale: 0.9 } : {}}>
+            <S.Boost
+                $rareColor={RARE_COLORS[rare]}
+                onClick={handleClickBoost}
+                as={motion.div}
+                transition={{ duration: 0.3 }}
+                whileTap={canBuy || isNeedToUnblock ? { scale: 0.9 } : {}}>
                 <S.InfoWrapper>
                     <S.AvatarWrapper>
                         <S.BoostAvatar src={imagePath} $isDisabled={!!(isNeedToUnblock)} />

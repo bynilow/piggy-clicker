@@ -1,115 +1,19 @@
-import { activeBoostsList, PassiveBoost, passiveBoostsList, ActiveBoost, employeeBoostsList, EmployeeBoost, useBoosts } from '@/entities/Boost';
+import { useBoosts } from '@/entities/Boost';
 import { ActionButton, Loader, Page } from '@/shared';
 import { ReactElement, useState } from 'react';
 import { BOOSTS_PAGE_ACTIONS } from '../constant';
 import { BoostActionName } from '../model';
+import { ActiveBoosts } from './ActiveBoosts';
 import * as S from './BoostsPage.styles';
-
-const PassiveBoosts = (
-    <>
-        <S.Column>
-            {
-                passiveBoostsList.filter((_, index) => index % 2 === 0).map(boost => (
-                    <PassiveBoost
-                        key={boost.title}
-                        imagePath={boost.imagePath}
-                        id={boost.id}
-                        title={boost.title}
-                        amount={boost.amount}
-                        cost={boost.cost}
-                        needToUnblock={boost.needToUnblock} />
-                ))
-            }
-        </S.Column>
-        <S.Column>
-            {
-                passiveBoostsList.filter((_, index) => index % 2 !== 0).map(boost => (
-                    <PassiveBoost
-                        key={boost.title}
-                        id={boost.id}
-                        imagePath={boost.imagePath}
-                        title={boost.title}
-                        amount={boost.amount}
-                        cost={boost.cost}
-                        needToUnblock={boost.needToUnblock} />
-                ))
-            }
-        </S.Column>
-    </>
-);
-
-const ActiveBoosts = (
-    <>
-        <S.Column>
-            {
-                activeBoostsList.filter((_, index) => index % 2 === 0).map(boost => (
-                    <ActiveBoost
-                        key={boost.title}
-                        imagePath={boost.imagePath}
-                        id={boost.id}
-                        title={boost.title}
-                        type={boost.type}
-                        amount={boost.amount}
-                        cost={boost.cost}
-                        needToUnblock={boost.needToUnblock} />
-                ))
-            }
-        </S.Column>
-        <S.Column>
-            {
-                activeBoostsList.filter((_, index) => index % 2 !== 0).map(boost => (
-                    <ActiveBoost
-                        key={boost.title}
-                        id={boost.id}
-                        imagePath={boost.imagePath}
-                        title={boost.title}
-                        type={boost.type}
-                        amount={boost.amount}
-                        cost={boost.cost}
-                        needToUnblock={boost.needToUnblock} />
-                ))
-            }
-        </S.Column>
-    </>
-);
-
-const EmployeeBoosts = (
-    <>
-        <S.Column>
-            {
-                employeeBoostsList.filter((_, index) => index % 2 === 0).map(boost => (
-                    <EmployeeBoost
-                        key={boost.title}
-                        imagePath={boost.imagePath}
-                        id={boost.id}
-                        title={boost.title}
-                        amount={boost.amount}
-                        cost={boost.cost}
-                        needToUnblock={boost.needToUnblock} />
-                ))
-            }
-        </S.Column>
-        <S.Column>
-            {
-                employeeBoostsList.filter((_, index) => index % 2 !== 0).map(boost => (
-                    <EmployeeBoost
-                        key={boost.title}
-                        id={boost.id}
-                        imagePath={boost.imagePath}
-                        title={boost.title}
-                        amount={boost.amount}
-                        cost={boost.cost}
-                        needToUnblock={boost.needToUnblock} />
-                ))
-            }
-        </S.Column>
-    </>
-);
+import { CardSets } from './CardSets';
+import { EmployeeBoosts } from './EmployeeBoosts';
+import { PassiveBoosts } from './PassiveBoosts/PassiveBoosts';
 
 const tabs: Record<BoostActionName, ReactElement> = {
-    passive: PassiveBoosts,
-    active: ActiveBoosts,
-    employee: EmployeeBoosts
+    passive: <PassiveBoosts />,
+    active: <ActiveBoosts />,
+    employee: <EmployeeBoosts />,
+    sets: <CardSets />
 }
 
 const BoostsPage = () => {
@@ -122,7 +26,7 @@ const BoostsPage = () => {
     const { boostIsLoading } = useBoosts();
 
     return (
-        <Page>
+        <Page $justifyContent='start'>
             {
                 boostIsLoading
                     ? (
@@ -142,9 +46,7 @@ const BoostsPage = () => {
                                     ))
                                 }
                             </S.ActionsGroup>
-                            <S.BoostsList>
-                                {tabs[activeButton]}
-                            </S.BoostsList>
+                            {tabs[activeButton]}
                         </>
                     )
             }
@@ -153,3 +55,4 @@ const BoostsPage = () => {
 }
 
 export { BoostsPage };
+

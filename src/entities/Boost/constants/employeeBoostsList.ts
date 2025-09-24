@@ -4,6 +4,7 @@ import { EmployeeBoostModel } from "../model";
 const employeeBoostsList: EmployeeBoostModel[] = [
     {
         id: "cleaner",
+        rare: 'common',
         title: "Уборщик",
         imagePath: cleanerImage,
         amount: 0.2,
@@ -12,6 +13,7 @@ const employeeBoostsList: EmployeeBoostModel[] = [
     },
     {
         id: "seller",
+        rare: 'common',
         title: "Продавец",
         imagePath: sellerImage,
         amount: 0.6,
@@ -20,6 +22,7 @@ const employeeBoostsList: EmployeeBoostModel[] = [
     },
     {
         id: "courier",
+        rare: 'common',
         title: "Курьер",
         imagePath: courierImage,
         amount: 0.6,
@@ -28,6 +31,7 @@ const employeeBoostsList: EmployeeBoostModel[] = [
     },
     {
         id: "security",
+        rare: 'rare',
         title: "Охранник",
         imagePath: securityImage,
         amount: 1.6,
@@ -36,6 +40,7 @@ const employeeBoostsList: EmployeeBoostModel[] = [
     },
     {
         id: "bookkeeper",
+        rare: 'mythical',
         title: "Бухгалтер",
         imagePath: bookkeeperImage,
         amount: 3.6,
@@ -44,6 +49,7 @@ const employeeBoostsList: EmployeeBoostModel[] = [
     },
     {
         id: "administrator",
+        rare: 'legendary',
         title: "Администратор",
         imagePath: administratorImage,
         amount: 5.8,
