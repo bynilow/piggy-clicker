@@ -48,7 +48,7 @@ const ReceivedCardsModal = ({ boostsIds }: Props) => {
                 $rareColor={RARE_COLORS[boost.rare]}
                 as={motion.div}
                 transition={{
-                  duration: 1,
+                  duration: 0.5,
                   delay: index + 0.5 + 0.3
                 }}
                 initial={initialAnim}
@@ -67,7 +67,7 @@ const ReceivedCardsModal = ({ boostsIds }: Props) => {
                 $rareColor={RARE_COLORS[boost.rare]}
                 as={motion.div}
                 transition={{
-                  duration: 1,
+                  duration: 0.5,
                   delay: index + 1 + 0.3
                 }}
                 initial={initialAnim}

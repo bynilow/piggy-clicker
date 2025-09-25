@@ -1,15 +1,20 @@
-import { CoinIcon, Divider, getAmountWithPercent, getFormattedCoins, useBoostsStore, useModal, useUserStore } from '@/shared';
-import * as S from './CardSet.styles';
-import { CARD_SET_TIME_FOR_COST_SECONDS } from '../constants';
+import { Divider, getAmountWithPercent, useBoostsStore, useModal, useUserStore } from '@/shared';
 import { motion } from 'motion/react';
-import { ObtainedCardsModal } from './ObtainedCardsModal';
+import { CARD_SET_TIME_FOR_COST_SECONDS, LOCALIZATION, UPGRADES_TO_OPEN_SETS } from '../constants';
 import { CardsSetsModel } from '../model';
+import * as S from './CardSet.styles';
+import { ObtainedCardsModal } from './ObtainedCardsModal';
 
 const CardSet = ({ imagePath, title, costMultiplier, boosts }: CardsSetsModel) => {
   const { coins } = useUserStore();
-  const { perSecond, incomeMultiplier } = useBoostsStore();
+  const { boosts: boostsStore, perSecond, incomeMultiplier } = useBoostsStore();
+
+  const foundedBoosts = boostsStore.filter(boost => boosts.includes(boost.boost_id));
+
+  const haveCountForBuy = foundedBoosts.length >= UPGRADES_TO_OPEN_SETS;
+
   const cost = getAmountWithPercent(perSecond, incomeMultiplier) * CARD_SET_TIME_FOR_COST_SECONDS * costMultiplier;
-  const canBuy = coins >= cost;
+  const canBuy = coins >= cost && haveCountForBuy;
 
   const { openModal } = useModal();
 
@@ -31,13 +36,13 @@ const CardSet = ({ imagePath, title, costMultiplier, boosts }: CardsSetsModel) =
       </S.Head>
       <Divider isLight />
       <S.SetCost $canBuy={canBuy}>
-
-        {getFormattedCoins(cost)}
-        <CoinIcon />
-
+        {LOCALIZATION.SHOW}
+        {/* {getFormattedCoins(cost)}
+        <CoinIcon /> */}
       </S.SetCost>
     </S.CardSet>
   );
 }
 
 export { CardSet };
+

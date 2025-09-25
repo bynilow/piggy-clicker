@@ -25,6 +25,8 @@ const ObtainedCardsModal = ({ boostsIds, canBuy, cost }: Props) => {
 
   const { buyBoostSet, boostSetIsPending } = useBoostSet();
 
+  const haveCountForBuy = foundedBoosts.filter(boost => boost.haveUser).length >= UPGRADES_TO_OPEN_SETS;
+
   const handleBuySet = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     event.stopPropagation();
@@ -63,9 +65,9 @@ const ObtainedCardsModal = ({ boostsIds, canBuy, cost }: Props) => {
         </S.Column>
       </S.List>
       <S.Buttons>
-        <Button disabled={!canBuy || boosts.length < UPGRADES_TO_OPEN_SETS || boostSetIsPending} size='S' onClick={handleBuySet}>
+        <Button disabled={!canBuy || !haveCountForBuy || boostSetIsPending} size='S' onClick={handleBuySet}>
           {
-            boosts.length >= UPGRADES_TO_OPEN_SETS
+            haveCountForBuy
               ? <>{getFormattedCoins(cost)} <CoinIcon /></>
               : `${LOCALIZATION.REQUIRED}: ${UPGRADES_TO_OPEN_SETS} ${LOCALIZATION.TYPES_UPGRADES}`
           }
