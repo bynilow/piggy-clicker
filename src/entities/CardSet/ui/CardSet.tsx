@@ -1,6 +1,6 @@
 import { Divider, getAmountWithPercent, useBoostsStore, useModal, useUserStore } from '@/shared';
 import { motion } from 'motion/react';
-import { CARD_SET_TIME_FOR_COST_SECONDS, LOCALIZATION, UPGRADES_TO_OPEN_SETS } from '../constants';
+import { BASE_COST_BOOST_SET, CARD_SET_TIME_FOR_COST_SECONDS, LOCALIZATION, UPGRADES_TO_OPEN_SETS } from '../constants';
 import { CardsSetsModel } from '../model';
 import * as S from './CardSet.styles';
 import { ObtainedCardsModal } from './ObtainedCardsModal';
@@ -13,7 +13,7 @@ const CardSet = ({ imagePath, title, costMultiplier, boosts }: CardsSetsModel) =
 
   const haveCountForBuy = foundedBoosts.length >= UPGRADES_TO_OPEN_SETS;
 
-  const cost = getAmountWithPercent(perSecond, incomeMultiplier) * CARD_SET_TIME_FOR_COST_SECONDS * costMultiplier;
+  const cost = BASE_COST_BOOST_SET + getAmountWithPercent(perSecond, incomeMultiplier) * CARD_SET_TIME_FOR_COST_SECONDS * costMultiplier;
   const canBuy = coins >= cost && haveCountForBuy;
 
   const { openModal } = useModal();
