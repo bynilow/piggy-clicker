@@ -3,7 +3,7 @@ import { PassiveBoostModel } from '../../model';
 import { BoostWrapper } from '../BoostWrapper';
 import * as S from './PassiveBoost.styles';
 
-const PassiveBoost = ({ title, rare, amount, cost, needToUnblock, imagePath, id }: PassiveBoostModel) => {
+const PassiveBoost = ({ title, rare, amount, cost, needToUnblock, imagePath, id, createdDate }: PassiveBoostModel) => {
     const { boosts } = useBoostsStore();
 
     const level = boosts.find(boost => boost.boost_id === id)?.boost_level || 0;
@@ -24,7 +24,8 @@ const PassiveBoost = ({ title, rare, amount, cost, needToUnblock, imagePath, id 
             cost={cost}
             imagePath={imagePath}
             level={level}
-            needToUnblock={needToUnblock}>
+            needToUnblock={needToUnblock}
+            createdDate={createdDate}>
             {
                 level > 0
                     ? (

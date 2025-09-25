@@ -18,7 +18,8 @@ const ActiveBoosts = () => {
               type={boost.type}
               amount={boost.amount}
               cost={boost.cost}
-              needToUnblock={boost.needToUnblock} />
+              needToUnblock={boost.needToUnblock}
+              createdDate={boost.createdDate} />
           ))
         }
       </S.Column>
@@ -34,7 +35,8 @@ const ActiveBoosts = () => {
               type={boost.type}
               amount={boost.amount}
               cost={boost.cost}
-              needToUnblock={boost.needToUnblock} />
+              needToUnblock={boost.needToUnblock}
+              createdDate={boost.createdDate} />
           ))
         }
       </S.Column>

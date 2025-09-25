@@ -1,27 +1,22 @@
-import { CoinIcon, Divider, getFormattedCoins, LoaderModal, Rare, useBoostsStore, useModal, useUserStore } from '@/shared';
-import { BASE_COST_MULTIPLIER, RARE_COLORS } from '@/shared/constants';
+import { Badge, CoinIcon, Divider, getFormattedCoins, LoaderModal, Rare, useBoostsStore, useModal, useUserStore } from '@/shared';
+import { BASE_COST_MULTIPLIER, DAY_IN_MS, RARE_COLORS } from '@/shared/constants';
 import { motion } from 'motion/react';
 import { useMemo } from 'react';
 import { lockIconUrl } from '../../assets';
 import * as S from './BoostWrapper.styles';
 import { getBoostNameById } from '../../lib';
 import { NeedBoosts } from '../NeedBoosts';
-import { NeedToUnblock } from '../../model';
+import { BaseBoostModel, NeedToUnblock } from '../../model';
 import { useBoosts } from '../../model/useBoosts';
 import { useUser } from '@/entities/User';
+import { LOCALIZATION } from '../../constants';
 
 interface Props {
-    id: string;
-    rare: Rare;
-    title: string;
-    level: number;
-    cost: number;
-    needToUnblock?: NeedToUnblock[];
-    imagePath?: string;
     children: React.ReactNode;
+    level: number;
 }
 
-const BoostWrapper = ({ title, rare, level, cost, needToUnblock, imagePath, children, id }: Props) => {
+const BoostWrapper = ({ title, rare, level, cost, needToUnblock, imagePath, children, id, createdDate }: Props & BaseBoostModel) => {
     const { openModal } = useModal();
 
     const totalCost = useMemo(() => level === 0 ? cost : cost * level * BASE_COST_MULTIPLIER, [level, cost])
@@ -50,59 +45,71 @@ const BoostWrapper = ({ title, rare, level, cost, needToUnblock, imagePath, chil
             buyBoost({ boostId: id, boostCost: totalCost });
         }
     };
+    console.log(title, createdDate)
+    const isNewBoost = Date.now() - new Date(createdDate?.getTime() || 0).getTime() < DAY_IN_MS;
 
     return (
         <>
-            <S.Boost
-                $rareColor={RARE_COLORS[rare]}
-                onClick={handleClickBoost}
-                as={motion.div}
-                transition={{ duration: 0.3 }}
-                whileTap={canBuy || isNeedToUnblock ? { scale: 0.9 } : {}}>
-                <S.InfoWrapper>
-                    <S.AvatarWrapper>
-                        <S.BoostAvatar src={imagePath} $isDisabled={!!(isNeedToUnblock)} />
-                        {
-                            isNeedToUnblock && (
-                                <S.LockWrapper>
-                                    <S.LockIcon src={lockIconUrl} />
-                                </S.LockWrapper>
-                            )
-                        }
-                    </S.AvatarWrapper>
-                    <S.Info>
-                        <S.Title>
-                            {title}
-                        </S.Title>
-                        {
-                            children
-                        }
-                    </S.Info>
-                </S.InfoWrapper>
+            <S.BoostWrapper>
                 {
-                    level > 0 && (
-                        <S.Level>
-                            x{level}
-                        </S.Level>
+                    isNewBoost && (
+                        <S.BadgeWrapper>
+                            <Badge text={LOCALIZATION.NEW} />
+                        </S.BadgeWrapper>
                     )
                 }
+                <S.Boost
+                    $rareColor={RARE_COLORS[rare]}
+                    onClick={handleClickBoost}
+                    as={motion.div}
+                    transition={{ duration: 0.3 }}
+                    whileTap={canBuy || isNeedToUnblock ? { scale: 0.9 } : {}}>
 
-                <S.BuyInfo>
-                    <Divider isLight />
+                    <S.InfoWrapper>
+                        <S.AvatarWrapper>
+                            <S.BoostAvatar src={imagePath} $isDisabled={!!(isNeedToUnblock)} />
+                            {
+                                isNeedToUnblock && (
+                                    <S.LockWrapper>
+                                        <S.LockIcon src={lockIconUrl} />
+                                    </S.LockWrapper>
+                                )
+                            }
+                        </S.AvatarWrapper>
+                        <S.Info>
+                            <S.Title>
+                                {title}
+                            </S.Title>
+                            {
+                                children
+                            }
+                        </S.Info>
+                    </S.InfoWrapper>
                     {
-                        isNeedToUnblock
-                            ? <S.Question>?</S.Question>
-                            : (
-                                <S.BoostCost $canBuy={canBuy}>
-
-                                    {getFormattedCoins(totalCost)}
-                                    <CoinIcon isDisabled={!true} />
-
-                                </S.BoostCost>
-                            )
+                        level > 0 && (
+                            <S.Level>
+                                x{level}
+                            </S.Level>
+                        )
                     }
-                </S.BuyInfo>
-            </S.Boost>
+
+                    <S.BuyInfo>
+                        <Divider isLight />
+                        {
+                            isNeedToUnblock
+                                ? <S.Question>?</S.Question>
+                                : (
+                                    <S.BoostCost $canBuy={canBuy}>
+
+                                        {getFormattedCoins(totalCost)}
+                                        <CoinIcon isDisabled={!true} />
+
+                                    </S.BoostCost>
+                                )
+                        }
+                    </S.BuyInfo>
+                </S.Boost>
+            </S.BoostWrapper>
         </>
     );
 }

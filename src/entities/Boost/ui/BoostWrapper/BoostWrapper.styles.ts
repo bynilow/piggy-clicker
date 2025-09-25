@@ -118,6 +118,35 @@ const CurrentPassiveIncome = styled.div`
 const Title = styled.div`
     font-size: 16px;
     line-height: 0.9;
+`;
+
+const BadgeWrapper = styled.div`
+    position: absolute;
+    margin: -8px;
+    z-index: 2;
+    top: 0;
+    right: 0;
+`;
+
+const BoostWrapper = styled.div`
+    position: relative;
 `
 
-export { Title, CurrentPassiveIncome, Question, LockWrapper, AvatarWrapper, LockIcon, Level, InfoWrapper, Boost, Info, BoostAvatar, BuyInfo, BoostUpgrades, BoostCost };
+export {
+    BoostWrapper,
+    Title,
+    CurrentPassiveIncome,
+    Question,
+    LockWrapper,
+    AvatarWrapper,
+    LockIcon,
+    Level,
+    InfoWrapper,
+    Boost,
+    Info,
+    BoostAvatar,
+    BuyInfo,
+    BoostUpgrades,
+    BoostCost,
+    BadgeWrapper
+};

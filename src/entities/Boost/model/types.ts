@@ -5,35 +5,27 @@ interface NeedToUnblock {
     level: number;
 };
 
-interface PassiveBoostModel {
+interface BaseBoostModel {
     id: string;
     rare: Rare;
     title: string;
     imagePath?: string;
-    amount: number;
     cost: number;
+    createdDate?: Date;
     needToUnblock?: NeedToUnblock[];
 }
 
-interface ActiveBoostModel {
-    id: string;
-    rare: Rare;
-    title: string;
-    imagePath?: string;
+interface PassiveBoostModel extends BaseBoostModel {
+    amount: number;
+}
+
+interface ActiveBoostModel extends BaseBoostModel {
     type: 'click';
     amount: number;
-    cost: number;
-    needToUnblock?: NeedToUnblock[];
 }
 
-interface EmployeeBoostModel {
-    id: string;
-    rare: Rare;
-    title: string;
-    imagePath?: string;
+interface EmployeeBoostModel extends BaseBoostModel {
     amount: number;
-    cost: number;
-    needToUnblock?: NeedToUnblock[];
 }
 
 interface BoostDto {
@@ -43,4 +35,4 @@ interface BoostDto {
     user_id: number;
 }
 
-export type { PassiveBoostModel, ActiveBoostModel, EmployeeBoostModel, NeedToUnblock, BoostDto };
+export type { PassiveBoostModel, ActiveBoostModel, EmployeeBoostModel, NeedToUnblock, BoostDto, BaseBoostModel };

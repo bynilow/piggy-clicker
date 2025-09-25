@@ -15,7 +15,8 @@ const EmployeeBoosts = () => {
               title={boost.title}
               amount={boost.amount}
               cost={boost.cost}
-              needToUnblock={boost.needToUnblock} />
+              needToUnblock={boost.needToUnblock}
+              createdDate={boost.createdDate} />
           ))
         }
       </S.Column>
@@ -30,7 +31,8 @@ const EmployeeBoosts = () => {
               title={boost.title}
               amount={boost.amount}
               cost={boost.cost}
-              needToUnblock={boost.needToUnblock} />
+              needToUnblock={boost.needToUnblock}
+              createdDate={boost.createdDate} />
           ))
         }
       </S.Column>

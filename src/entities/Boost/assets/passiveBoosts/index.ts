@@ -13,6 +13,7 @@ import techStartupImage from './tech_startup.webp';
 import carDealershipImage from './car_dealership.webp';
 import realEstateAgencyImage from './real_estate_agency.webp';
 import bankImage from './bank.webp';
+import bakeryImage from './bakery.webp';
 
 export {
     coffeeShopImage,
@@ -29,5 +30,6 @@ export {
     shoppingMallImage,
     hotelImage,
     bankImage,
-    skyscraperImage
+    skyscraperImage,
+    bakeryImage
 }

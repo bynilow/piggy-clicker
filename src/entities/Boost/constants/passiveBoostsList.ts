@@ -1,4 +1,4 @@
-import { bankImage, bookStoreImage, carDealershipImage, cinemaImage, clothingStoreImage, coffeeShopImage, electronicsStoreImage, fitnessCenterImage, hotelImage, realEstateAgencyImage, restaurantImage, shoppingMallImage, skyscraperImage, supermarketImage, techStartupImage } from "../assets";
+import { bakeryImage, bankImage, bookStoreImage, carDealershipImage, cinemaImage, clothingStoreImage, coffeeShopImage, electronicsStoreImage, fitnessCenterImage, hotelImage, realEstateAgencyImage, restaurantImage, shoppingMallImage, skyscraperImage, supermarketImage, techStartupImage } from "../assets";
 import { PassiveBoostModel } from "../model";
 
 const passiveBoostsList: PassiveBoostModel[] = [
@@ -21,6 +21,16 @@ const passiveBoostsList: PassiveBoostModel[] = [
         needToUnblock: [
             { id: 'seller', level: 1 }
         ]
+    },
+    {
+        id: "bakery" as const,
+        rare: 'rare',
+        title: "Пекарня",
+        imagePath: bakeryImage,
+        amount: 0.65,
+        cost: 740,
+        createdDate: new Date('2025-09-25'),
+        needToUnblock: []
     },
     {
         id: "book_store" as const,
