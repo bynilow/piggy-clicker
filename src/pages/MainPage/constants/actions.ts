@@ -27,6 +27,11 @@ const MAIN_PAGE_ACTIONS = [
         title: 'Топ',
         iconUrl: icons.starIconUrl
     },
+    {
+        id: 'achievements',
+        title: 'Достижения',
+        iconUrl: icons.achievementIconUrl
+    },
 ] as const;
 
 export { MAIN_PAGE_ACTIONS };

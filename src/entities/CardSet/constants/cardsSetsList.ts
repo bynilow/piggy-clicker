@@ -22,6 +22,13 @@ const cardsSetsList: CardsSetsModel[] = [
         boosts: passiveBoostsList.map(boost => boost.id),
     },
     {
+        id: "set_active",
+        title: `Набор - "Активный заработок"`,
+        costMultiplier: 1.2,
+        imagePath: startBoostSetImage,
+        boosts: activeBoostsList.map(boost => boost.id),
+    },
+    {
         id: "set_employees",
         title: `Набор - "Сотрудники"`,
         costMultiplier: 1.4,

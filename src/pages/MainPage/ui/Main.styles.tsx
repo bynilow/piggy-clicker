@@ -72,7 +72,7 @@ const Actions = styled.div`
     width: calc(100% + 32px);
     padding: 0 16px;
     display: grid;
-    grid-template-columns: repeat(5, 100px);
+    grid-template-columns: repeat(6, 100px);
     grid-template-rows: 1;
     gap: 14px;
     overflow-y: scroll;

@@ -122,10 +122,12 @@ const Title = styled.div`
 
 const BadgeWrapper = styled.div`
     position: absolute;
-    margin: -8px;
+    margin: -14px auto;
     z-index: 2;
     top: 0;
     right: 0;
+    left: 0;
+    width: fit-content;
 `;
 
 const BoostWrapper = styled.div`

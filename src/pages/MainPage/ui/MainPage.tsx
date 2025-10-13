@@ -12,6 +12,7 @@ import { BALANCE_SIZE_MEDIUM_COUNT, BALANCE_SIZE_SMALL_COUNT, MAIN_PAGE_ACTIONS 
 import { MainPageActionsId } from '../model';
 import * as S from './Main.styles';
 import { LeadersPage } from '@/pages/LeadersPage';
+import { AchievementPage } from '@/pages/AchievementPage';
 
 const tabs: Record<MainPageActionsId, JSX.Element> = {
     main: <ClickPage />,
@@ -19,6 +20,7 @@ const tabs: Record<MainPageActionsId, JSX.Element> = {
     referrals: <ReferralsPage />,
     send: <SendPage />,
     leaders: <LeadersPage />,
+    achievements: <AchievementPage />,
 }
 
 const initialStyles: TargetAndTransition | VariantLabels = {

@@ -50,7 +50,11 @@ const BoostWrapper = ({ title, rare, level, cost, needToUnblock, imagePath, chil
 
     return (
         <>
-            <S.BoostWrapper>
+            <S.BoostWrapper
+                onClick={handleClickBoost}
+                as={motion.div}
+                transition={{ duration: 0.3 }}
+                whileTap={canBuy || isNeedToUnblock ? { scale: 0.9 } : {}}>
                 {
                     isNewBoost && (
                         <S.BadgeWrapper>
@@ -58,12 +62,7 @@ const BoostWrapper = ({ title, rare, level, cost, needToUnblock, imagePath, chil
                         </S.BadgeWrapper>
                     )
                 }
-                <S.Boost
-                    $rareColor={RARE_COLORS[rare]}
-                    onClick={handleClickBoost}
-                    as={motion.div}
-                    transition={{ duration: 0.3 }}
-                    whileTap={canBuy || isNeedToUnblock ? { scale: 0.9 } : {}}>
+                <S.Boost $rareColor={RARE_COLORS[rare]} >
 
                     <S.InfoWrapper>
                         <S.AvatarWrapper>

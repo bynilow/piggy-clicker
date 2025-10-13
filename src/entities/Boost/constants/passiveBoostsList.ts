@@ -29,7 +29,7 @@ const passiveBoostsList: PassiveBoostModel[] = [
         imagePath: bakeryImage,
         amount: 0.65,
         cost: 740,
-        createdDate: new Date('2025-09-25'),
+        createdDate: new Date('2025-09-26, 13:00'),
         needToUnblock: []
     },
     {

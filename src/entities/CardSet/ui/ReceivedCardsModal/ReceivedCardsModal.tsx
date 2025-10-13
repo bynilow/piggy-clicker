@@ -5,6 +5,7 @@ import { LOCALIZATION } from '../../constants';
 import * as S from './ReceivedCardsModal.styles';
 import { motion, TargetAndTransition } from 'motion/react';
 import { VariantLabels } from 'motion';
+import { useState } from 'react';
 
 interface Props {
   boostsIds: string[];
@@ -29,6 +30,12 @@ const ReceivedCardsModal = ({ boostsIds }: Props) => {
 
   const { closeModal } = useModal();
 
+  const [animationDuration, setAnimationDuration] = useState(0.5);
+
+  const handleSpeedUp = () => {
+    setAnimationDuration(0.1);
+  }
+
   return (
     <>
       <S.Head>
@@ -39,7 +46,7 @@ const ReceivedCardsModal = ({ boostsIds }: Props) => {
           {LOCALIZATION.YOU_GET}
         </Description>
       </S.Head>
-      <S.List>
+      <S.List onClick={handleSpeedUp}>
         <S.Column>
           {
             foundedBoosts.filter((_, index) => index % 2 === 0).map((boost, index) => (
@@ -48,8 +55,8 @@ const ReceivedCardsModal = ({ boostsIds }: Props) => {
                 $rareColor={RARE_COLORS[boost.rare]}
                 as={motion.div}
                 transition={{
-                  duration: 0.5,
-                  delay: index + 0.5 + 0.3
+                  duration: animationDuration,
+                  delay: index + animationDuration
                 }}
                 initial={initialAnim}
                 animate={animateAnim} >
@@ -67,8 +74,8 @@ const ReceivedCardsModal = ({ boostsIds }: Props) => {
                 $rareColor={RARE_COLORS[boost.rare]}
                 as={motion.div}
                 transition={{
-                  duration: 0.5,
-                  delay: index + 1 + 0.3
+                  duration: animationDuration,
+                  delay: index + animationDuration * 2
                 }}
                 initial={initialAnim}
                 animate={animateAnim} >
