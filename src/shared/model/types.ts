@@ -1,3 +1,9 @@
+import { ReferralDto } from "@/entities/Referral";
+
 type Rare = 'common' | 'rare' | 'mythical' | 'legendary';
 
-export type { Rare };
+interface ReferralStore extends ReferralDto {
+  makeYouPerSecond: number;
+};
+
+export type { Rare, ReferralStore };

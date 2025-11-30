@@ -1,3 +1,6 @@
-const BUY_BOOST_SET_ENDPOINT = `/api/sets/buy`;
+const BOOST_KITS_OPEN_ENDPOINT = `/api/sets/buy`;
+const BOOSTS_KITS_ENDPOINT = `/api/kits`;
+const BOOSTS_KITS_ADD_ENDPOINT = `/api/kits/add`;
+const BOOSTS_KITS_REMOVE_ENDPOINT = `/api/kits/remove`;
 
-export { BUY_BOOST_SET_ENDPOINT };
+export { BOOST_KITS_OPEN_ENDPOINT, BOOSTS_KITS_ENDPOINT, BOOSTS_KITS_ADD_ENDPOINT, BOOSTS_KITS_REMOVE_ENDPOINT };

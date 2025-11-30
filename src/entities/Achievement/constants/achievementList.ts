@@ -1,11 +1,12 @@
-import { AchievementModel } from "../models";
+import { AchievementModel } from "../model";
 
 const achievementList: AchievementModel[] = [
   {
     id: 'buy_boosts',
     description: 'Купить любых улучшений:',
     image: '',
-    level: 'common',
+    level: 0,
+    currentAmount: 0,
     levelsAmount: {
       common: 50,
       rare: 300,
@@ -25,7 +26,8 @@ const achievementList: AchievementModel[] = [
     id: 'buy_passive',
     description: 'Купить пассивных улучшений:',
     image: '',
-    level: 'common',
+    level: 0,
+    currentAmount: 0,
     levelsAmount: {
       common: 10,
       rare: 100,
@@ -45,7 +47,8 @@ const achievementList: AchievementModel[] = [
     id: 'buy_active',
     description: 'Купить активных улучшений:',
     image: '',
-    level: 'common',
+    level: 0,
+    currentAmount: 0,
     levelsAmount: {
       common: 5,
       rare: 50,
@@ -65,7 +68,8 @@ const achievementList: AchievementModel[] = [
     id: 'buy_employees',
     description: 'Купить улучшений сотрудников:',
     image: '',
-    level: 'common',
+    level: 0,
+    currentAmount: 0,
     levelsAmount: {
       common: 7,
       rare: 80,
@@ -85,7 +89,8 @@ const achievementList: AchievementModel[] = [
     id: 'invite_referrals',
     description: 'Пригласить новых игроков:',
     image: '',
-    level: 'common',
+    level: 0,
+    currentAmount: 0,
     levelsAmount: {
       common: 1,
       rare: 2,
@@ -105,7 +110,8 @@ const achievementList: AchievementModel[] = [
     id: 'referrals_income',
     description: 'Доход от приглашенных в секунду:',
     image: '',
-    level: 'common',
+    level: 0,
+    currentAmount: 0,
     levelsAmount: {
       common: 1,
       rare: 10,
@@ -125,7 +131,8 @@ const achievementList: AchievementModel[] = [
     id: 'buy_one',
     description: 'Довести любое улучшение до уровня:',
     image: '',
-    level: 'common',
+    level: 0,
+    currentAmount: 0,
     levelsAmount: {
       common: 3,
       rare: 8,

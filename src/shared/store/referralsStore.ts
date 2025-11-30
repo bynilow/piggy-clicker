@@ -3,10 +3,7 @@ import { ReferralDto } from '@/entities/Referral';
 import { create } from 'zustand';
 import { getAmountWithPercent } from '../lib';
 import { REFERRAL_INCOME_MULTIPLIER } from '../constants';
-
-interface ReferralStore extends ReferralDto {
-    makeYouPerSecond: number;
-};
+import { ReferralStore } from '../model';
 
 interface ReferralsStore {
     referrals: ReferralStore[] | null;

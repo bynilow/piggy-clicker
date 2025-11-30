@@ -35,4 +35,11 @@ interface BoostDto {
     user_id: number;
 }
 
-export type { PassiveBoostModel, ActiveBoostModel, EmployeeBoostModel, NeedToUnblock, BoostDto, BaseBoostModel };
+export type {
+    PassiveBoostModel,
+    ActiveBoostModel,
+    EmployeeBoostModel,
+    NeedToUnblock,
+    BoostDto,
+    BaseBoostModel,
+};

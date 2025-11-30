@@ -7,4 +7,6 @@ const RARE_PRIORITY: Record<Rare, number> = {
   legendary: 3,
 }
 
-export { RARE_PRIORITY };
+const RARE_BY_INDEX: Rare[] = ['common', 'rare', 'mythical', 'legendary'];
+
+export { RARE_PRIORITY, RARE_BY_INDEX };

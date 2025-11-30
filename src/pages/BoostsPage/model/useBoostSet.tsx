@@ -1,9 +1,8 @@
 import { FETCH_BOOSTS_QUERY_KEY } from "@/entities/Boost";
+import { ReceivedCardsModal, openBoostSet } from "@/entities/CardSet";
+import { OpenBoostKitsRequestDto } from "@/entities/CardSet/model";
 import { Error, Loader, useModal, useUserStore } from "@/shared";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { openBoostSet } from "../api";
-import { ReceivedCardsModal } from "../ui";
-import { OpenBoostKitsRequestDto } from "./types";
 
 const useBoostSet = () => {
     const queryClient = useQueryClient();

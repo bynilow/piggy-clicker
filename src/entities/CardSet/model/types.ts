@@ -8,7 +8,7 @@ interface CardsSetsModel {
   boosts: string[];
 }
 
-interface BuyBoostSetRequestDto {
+interface OpenBoostKitsRequestDto {
   cost: number;
   boosts: {
     boost_id: string;
@@ -16,8 +16,22 @@ interface BuyBoostSetRequestDto {
   }[];
 }
 
-interface BuyBoostSetResponseDto {
+interface OpenBoostKitsResponseDto {
   boosts_id: string[];
 }
 
-export type { CardsSetsModel, BuyBoostSetRequestDto, BuyBoostSetResponseDto };
+
+interface BoostsKitsDto {
+  id: string;
+  user_id: string;
+  kit_id: string;
+  count: number;
+}
+
+interface AddBoostsKitsRequestDto {
+  kit_id: string;
+  count: number;
+}
+
+
+export type { CardsSetsModel, OpenBoostKitsRequestDto, OpenBoostKitsResponseDto, BoostsKitsDto, AddBoostsKitsRequestDto };
